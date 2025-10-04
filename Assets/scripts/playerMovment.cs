@@ -11,6 +11,7 @@ public class playerMovment : MonoBehaviour
     [SerializeField] private Transform orientation;
 
     [SerializeField] private float horizontalInput, verticalInput;
+    public bool canMove = true;
 
     [Header("Ground Check")]
     [SerializeField] private float playerHeight;
@@ -31,7 +32,7 @@ public class playerMovment : MonoBehaviour
        SpeedControl();
 
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-        Debug.Log(grounded);
+        //Debug.Log(grounded);
         
         if (grounded)
         {
@@ -44,7 +45,10 @@ public class playerMovment : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        movePlayer();
+        if (canMove)
+        {
+            movePlayer();
+        }
     }
     private void MyInput()
     {
