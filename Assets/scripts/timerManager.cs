@@ -23,7 +23,7 @@ public class timerManager : MonoBehaviour
         if (isRunning)
         {
             timer += Time.deltaTime;
-        }
+        }   
         // There are 600 seconds in 10 minutes (10 * 60 = 600)
         if (timer >= 600f)
         {
