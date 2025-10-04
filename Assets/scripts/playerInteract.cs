@@ -6,6 +6,9 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private float interactRange;
     [SerializeField] private Transform orientation;
     [SerializeField] private Camera mainCam;
+    [SerializeField] private Transform ComputerCamPos; // cameraposition för datorn
+    [SerializeField] private Transform PlayerCamPos; // Kamera återgå till spelaren efter interaction
+
     private bool isInteracting = false;
     private playerMovment movementScript;
 
@@ -14,7 +17,7 @@ public class playerInteract : MonoBehaviour
         movementScript = GetComponent<playerMovment>();
         mainCam = Camera.main;
     }
-    private void Update()
+    private void FixedUpdate()
     {
         Physics.Raycast(orientation.position, orientation.forward, out RaycastHit hit, interactRange, whatIsInteractable);
         if (hit.collider != null)
@@ -34,6 +37,8 @@ public class playerInteract : MonoBehaviour
             mainCam.GetComponent<cameraMovment>().enabled = false;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, ComputerCamPos.position, Time.deltaTime * 5f);
+            mainCam.transform.rotation = Quaternion.Lerp(mainCam.transform.rotation, ComputerCamPos.rotation, Time.deltaTime * 5f);
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -45,6 +50,8 @@ public class playerInteract : MonoBehaviour
             mainCam.GetComponent<cameraMovment>().enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            mainCam.transform.position = PlayerCamPos.position;
+            mainCam.transform.rotation = PlayerCamPos.rotation;
             break;
         }
         
