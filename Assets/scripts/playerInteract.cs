@@ -12,6 +12,10 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private Transform ComputerCamPos; // cameraposition f�r datorn
     [SerializeField] private Transform PlayerCamPos; // Kamera �terg� till spelaren efter interaction
     [SerializeField] private Transform ShelfCamPos; // cameraposition f�r hyllan
+    [SerializeField] private Transform VentCamPos; // cameraposition f�r ventilen
+
+    [Header("Items")]
+    [SerializeField] private bool hasScrewdriver = false;
 
     private bool CamIsOnTheMove = false;
     private Quaternion CamPosPreInteract;
@@ -82,6 +86,22 @@ public class playerInteract : MonoBehaviour
             case "shelf":
 
                 StartCoroutine(MoveCameraPos(ShelfCamPos)); // h�r f�r du l�gga in en ny cameraposition
+                break;
+
+            case "vent":
+                StartCoroutine(MoveCameraPos(ComputerCamPos));
+                if (hasScrewdriver)
+                {
+                    Destroy(currentInteractable);
+                    SmoothCamExit();
+                   
+                }
+                else
+                {
+                    Debug.Log("You need a screwdriver to open this vent");
+                    SmoothCamExit();
+                }
+                
                 break;
             // l�gg till fler object/tag h�r
         }
