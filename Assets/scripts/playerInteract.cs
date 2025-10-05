@@ -8,9 +8,10 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private float interactRange;
     [SerializeField] private Transform orientation;
     [SerializeField] private Camera mainCam;
-    [Header("Camera Positions")] // lägg till felr positioner för interactables
-    [SerializeField] private Transform ComputerCamPos; // cameraposition för datorn
-    [SerializeField] private Transform PlayerCamPos; // Kamera återgå till spelaren efter interaction
+    [Header("Camera Positions")] // lï¿½gg till felr positioner fï¿½r interactables
+    [SerializeField] private Transform ComputerCamPos; // cameraposition fï¿½r datorn
+    [SerializeField] private Transform PlayerCamPos; // Kamera ï¿½tergï¿½ till spelaren efter interaction
+    [SerializeField] private Transform ShelfCamPos; // cameraposition fï¿½r hyllan
 
     private bool CamIsOnTheMove = false;
     private Quaternion CamPosPreInteract;
@@ -56,7 +57,7 @@ public class playerInteract : MonoBehaviour
 
     }
 
-    private void LockCamera() // namnet sägeer ganska mycket
+    private void LockCamera() // namnet sï¿½geer ganska mycket
     {
         CamPosPreInteract = mainCam.transform.rotation; // hatar
         movementScript.canMove = false;
@@ -67,18 +68,25 @@ public class playerInteract : MonoBehaviour
 
     private void WhatWasInteracted(GameObject currentInteractable) // borde heta changeCamPos men orka
     {
+        
         string currentInteractableTag = currentInteractable.tag;
         Debug.Log("interactable tag: " + currentInteractableTag);
         switch (currentInteractableTag)
         {
             default: Debug.Log("Forgot tag on interactable"); break;
             case "computer":
-                
-                StartCoroutine(MoveCameraPos(ComputerCamPos)); // ändra ComputerCamPos beroende på interactionen, här ComputerCamPos
+
+                StartCoroutine(MoveCameraPos(ComputerCamPos)); // ï¿½ndra ComputerCamPos beroende pï¿½ interactionen, hï¿½r ComputerCamPos
                 break;
-            // lägg till fler object/tag här
+
+            case "shelf":
+
+                StartCoroutine(MoveCameraPos(ShelfCamPos)); // hï¿½r fï¿½r du lï¿½gga in en ny cameraposition
+                break;
+            // lï¿½gg till fler object/tag hï¿½r
         }
     }
+
 
     private void FreeCamera()
     {
@@ -87,7 +95,7 @@ public class playerInteract : MonoBehaviour
         mainCam.GetComponent<cameraMovment>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
+
     }
     
     private void SmoothCamExit()
@@ -98,7 +106,7 @@ public class playerInteract : MonoBehaviour
 
     private void CamToPlayer()
     {
-        mainCam.transform.position = PlayerCamPos.position; // återgå till original position
+        mainCam.transform.position = PlayerCamPos.position; // ï¿½tergï¿½ till original position
         
     }
 
@@ -117,7 +125,7 @@ public class playerInteract : MonoBehaviour
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.SmoothStep(0,1, elapsed/duration); // fråga inte, matte är svårt
+            float t = Mathf.SmoothStep(0,1, elapsed/duration); // frï¿½ga inte, matte ï¿½r svï¿½rt
             mainCam.transform.position = Vector3.Lerp(CamStartPos, target.position, t);
             mainCam.transform.rotation = Quaternion.Lerp(CamStartRot, targetRot, t);
             yield return null;
