@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class playerInteract : MonoBehaviour
@@ -10,8 +12,8 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private Transform ComputerCamPos; // cameraposition för datorn
     [SerializeField] private Transform PlayerCamPos; // Kamera återgå till spelaren efter interaction
 
-    private Transform TargetCamPos = null;
-
+    private bool CamIsOnTheMove = false;
+    private Quaternion CamPosPreInteract;
 
     private bool isInteracting = false;
     private playerMovment movementScript;
@@ -29,7 +31,7 @@ public class playerInteract : MonoBehaviour
         if (hit.collider != null)
         {
             
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && !CamIsOnTheMove)
             {
                 isInteracting = true;
                 LockCamera();
@@ -37,26 +39,26 @@ public class playerInteract : MonoBehaviour
             }
 
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+
+        if (isInteracting && Input.GetKeyDown(KeyCode.Escape) && !CamIsOnTheMove)
         {
-            FreeCamera();
+            SmoothCamExit();
+            
         }
 
-        if (isInteracting && TargetCamPos != null)
-        {
-            mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, TargetCamPos.position, Time.deltaTime * 5f);
-            mainCam.transform.rotation = Quaternion.Lerp(mainCam.transform.rotation, TargetCamPos.rotation, Time.deltaTime * 5f);
-        }
-        
-        if (!isInteracting)
+
+
+        if (!isInteracting && !CamIsOnTheMove)
         {
             CamToPlayer();
         }
-        
+
+
     }
 
     private void LockCamera() // namnet sägeer ganska mycket
     {
+        CamPosPreInteract = mainCam.transform.rotation; // hatar
         movementScript.canMove = false;
         mainCam.GetComponent<cameraMovment>().enabled = false;
         Cursor.lockState = CursorLockMode.None;
@@ -66,13 +68,13 @@ public class playerInteract : MonoBehaviour
     private void WhatWasInteracted(GameObject currentInteractable) // borde heta changeCamPos men orka
     {
         string currentInteractableTag = currentInteractable.tag;
+        Debug.Log("interactable tag: " + currentInteractableTag);
         switch (currentInteractableTag)
         {
             default: Debug.Log("Forgot tag on interactable"); break;
             case "computer":
-                Debug.Log("interactable tag: " + currentInteractableTag);
-                TargetCamPos = ComputerCamPos; // ändra target pos beroende på interactionen, här ComputerCamPos
                 
+                StartCoroutine(MoveCameraPos(ComputerCamPos)); // ändra ComputerCamPos beroende på interactionen, här ComputerCamPos
                 break;
             // lägg till fler object/tag här
         }
@@ -81,19 +83,53 @@ public class playerInteract : MonoBehaviour
     private void FreeCamera()
     {
         isInteracting = false;
-        TargetCamPos = null;
         movementScript.canMove = true;
         mainCam.GetComponent<cameraMovment>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         
     }
+    
+    private void SmoothCamExit()
+    {
+
+        StartCoroutine(MoveCameraPos(PlayerCamPos));
+    }
 
     private void CamToPlayer()
     {
         mainCam.transform.position = PlayerCamPos.position; // återgå till original position
-        mainCam.transform.rotation = PlayerCamPos.rotation;
+        
     }
 
-    
+    private IEnumerator MoveCameraPos(Transform target)
+    {
+        CamIsOnTheMove = true;
+
+        float duration = 1f;
+        float elapsed = 0f;
+
+        Vector3 CamStartPos = mainCam.transform.position;
+        Quaternion CamStartRot = mainCam.transform.rotation;
+
+        Quaternion targetRot = target == PlayerCamPos ? CamPosPreInteract : target.rotation;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.SmoothStep(0,1, elapsed/duration); // fråga inte, matte är svårt
+            mainCam.transform.position = Vector3.Lerp(CamStartPos, target.position, t);
+            mainCam.transform.rotation = Quaternion.Lerp(CamStartRot, targetRot, t);
+            yield return null;
+        }
+        mainCam.transform.position = target.position;
+        mainCam.transform.rotation = targetRot;
+
+        if (target == PlayerCamPos)
+        {
+            FreeCamera();
+        }
+
+        CamIsOnTheMove = false;
+    }
 }
