@@ -112,18 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      spriteID: 3372de50dc0d6c448a550c0d3a5947d4
-      internalID: -1087223599
-=======
-      spriteID: 4f90a83fc694de1409d8caf8486937c5
-      internalID: -131097316
->>>>>>> Stashed changes
-=======
-      spriteID: 4f90a83fc694de1409d8caf8486937c5
-      internalID: -131097316
->>>>>>> Stashed changes
+      spriteID: 0bbfccd430eaf8390800000000000000
+      internalID: -7813835499251106896
       vertices: []
       indices: 
       edges: []
@@ -144,18 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      spriteID: 20968cf3cb978db48b5433753b234e30
-      internalID: -667121555
-=======
-      spriteID: 49a6b79badaf134419ccf3f90b93f558
-      internalID: 1913425243
->>>>>>> Stashed changes
-=======
-      spriteID: 49a6b79badaf134419ccf3f90b93f558
-      internalID: 1913425243
->>>>>>> Stashed changes
+      spriteID: 2be6040392b9de14a954e720d26e0715
+      internalID: -834882924
       vertices: []
       indices: 
       edges: []
@@ -176,18 +156,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      spriteID: a841d37a49cba8347bf7c7877ca292ad
-      internalID: -1503838638
-=======
-      spriteID: 4ff7cbdd1addf1e4eb5ddb2f1b903e64
-      internalID: -345256958
->>>>>>> Stashed changes
-=======
-      spriteID: 4ff7cbdd1addf1e4eb5ddb2f1b903e64
-      internalID: -345256958
->>>>>>> Stashed changes
+      spriteID: b2011e916774a344581ca0425baf40ce
+      internalID: -1195468107
       vertices: []
       indices: 
       edges: []
@@ -196,15 +166,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    spriteID: fea783261e1ec5e4ebee67efbe9c0791
-=======
-    spriteID: 16d7ded142145b9478f02c25e47a079f
->>>>>>> Stashed changes
-=======
-    spriteID: 16d7ded142145b9478f02c25e47a079f
->>>>>>> Stashed changes
+    spriteID: 8f3f589a2b3f59749a33673b304437e7
     internalID: 0
     vertices: []
     indices: 
@@ -214,21 +176,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      NewNotebookUI_0: -1087223599
-      NewNotebookUI_1: -667121555
-      NewNotebookUI_2: -1503838638
-=======
-      NewNotebookUI_0: -131097316
-      NewNotebookUI_1: 1913425243
-      NewNotebookUI_2: -345256958
->>>>>>> Stashed changes
-=======
-      NewNotebookUI_0: -131097316
-      NewNotebookUI_1: 1913425243
-      NewNotebookUI_2: -345256958
->>>>>>> Stashed changes
+      NewNotebookUI_0: -7813835499251106896
+      NewNotebookUI_1: -834882924
+      NewNotebookUI_2: -1195468107
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
