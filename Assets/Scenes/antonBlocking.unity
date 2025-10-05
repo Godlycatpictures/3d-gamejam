@@ -802,6 +802,8 @@ MonoBehaviour:
   interactRange: 2
   orientation: {fileID: 724076977}
   mainCam: {fileID: 1740499207}
+  ComputerCamPos: {fileID: 0}
+  PlayerCamPos: {fileID: 1448212374}
 --- !u!1 &472318948
 GameObject:
   m_ObjectHideFlags: 0
