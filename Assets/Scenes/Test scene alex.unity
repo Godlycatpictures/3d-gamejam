@@ -1603,7 +1603,6 @@ MonoBehaviour:
   mainCam: {fileID: 1740499207}
   ComputerCamPos: {fileID: 1024264699}
   PlayerCamPos: {fileID: 1448212374}
-  ShelfCamPos: {fileID: 0}
   VentCamPos: {fileID: 1290083562}
   hasScrewdriver: 0
 --- !u!1 &443747202
@@ -2024,7 +2023,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: 3d9f9e8c27d55fd0e9ed118b404b76bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.72
+      value: 1.04
       objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: 3d9f9e8c27d55fd0e9ed118b404b76bc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4339,7 +4338,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: -0.47, y: 0.35, z: 0.49}
+  m_Center: {x: -0.38, y: 0.35, z: 0.49}
 --- !u!4 &1283298579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2774220344278030320, guid: 3d9f9e8c27d55fd0e9ed118b404b76bc, type: 3}
@@ -4357,7 +4356,7 @@ GameObject:
   m_Layer: 7
   m_Name: ventCamPOS
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4370,7 +4369,7 @@ Transform:
   m_GameObject: {fileID: 1290083561}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.029, y: 0.577, z: 0.605}
+  m_LocalPosition: {x: 1.34, y: 0.577, z: 0.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
