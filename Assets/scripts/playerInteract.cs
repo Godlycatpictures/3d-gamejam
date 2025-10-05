@@ -11,7 +11,7 @@ public class playerInteract : MonoBehaviour
     [Header("Camera Positions")] // l�gg till felr positioner f�r interactables
     [SerializeField] private Transform ComputerCamPos; // cameraposition f�r datorn
     [SerializeField] private Transform PlayerCamPos; // Kamera �terg� till spelaren efter interaction
-    //[SerializeField] private Transform ShelfCamPos; // cameraposition f�r hyllan
+    [SerializeField] private Transform ShelfCamPos; // cameraposition f�r hyllan
     [SerializeField] private Transform VentCamPos; // cameraposition f�r ventilen
 
     [Header("Items")]
@@ -84,10 +84,10 @@ public class playerInteract : MonoBehaviour
                 StartCoroutine(MoveCameraPos(ComputerCamPos)); // �ndra ComputerCamPos beroende p� interactionen, h�r ComputerCamPos
                 break;
 
-            //case "shelf":
+            case "shelf":
 
-                //StartCoroutine(MoveCameraPos(ShelfCamPos)); // h�r f�r du l�gga in en ny cameraposition
-                //break;
+                StartCoroutine(MoveCameraPos(ShelfCamPos)); // h�r f�r du l�gga in en ny cameraposition
+                break;
 
             case "vent":
                 StartCoroutine(MoveCameraPos(ComputerCamPos));
