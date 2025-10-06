@@ -100,7 +100,7 @@ public class playerInteract : MonoBehaviour
                 else
                 {
                     Debug.Log("You need a screwdriver to open this vent");
-                    SmoothCamExit();
+                    
                 }
                 
                 break;
