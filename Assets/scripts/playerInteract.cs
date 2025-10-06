@@ -90,7 +90,7 @@ public class playerInteract : MonoBehaviour
                 break;
 
             case "vent":
-                StartCoroutine(MoveCameraPos(ComputerCamPos));
+                StartCoroutine(MoveCameraPos(VentCamPos));
                 if (hasScrewdriver)
                 {
                     //Ändra destroy till typ gå in i venten eller liknande

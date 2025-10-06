@@ -2020,11 +2020,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: 3d9f9e8c27d55fd0e9ed118b404b76bc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.37
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: 3d9f9e8c27d55fd0e9ed118b404b76bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.04
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: 3d9f9e8c27d55fd0e9ed118b404b76bc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4354,7 +4354,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1290083562}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: ventCamPOS
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -4369,13 +4369,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1290083561}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.34, y: 0.577, z: 0.71}
+  m_LocalRotation: {x: 0.579228, y: -0.579228, z: -0.4055798, w: 0.4055798}
+  m_LocalPosition: {x: 1.5, y: 0.55, z: 1.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1283298579}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -110, z: -90}
 --- !u!1 &1322200045
 GameObject:
   m_ObjectHideFlags: 0
