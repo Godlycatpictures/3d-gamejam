@@ -93,6 +93,7 @@ public class playerInteract : MonoBehaviour
                 StartCoroutine(MoveCameraPos(ComputerCamPos));
                 if (hasScrewdriver)
                 {
+                    //Ändra destroy till typ gå in i venten eller liknande
                     Destroy(currentInteractable);
                     SmoothCamExit();
                    
@@ -100,7 +101,7 @@ public class playerInteract : MonoBehaviour
                 else
                 {
                     Debug.Log("You need a screwdriver to open this vent");
-                    
+
                 }
                 
                 break;
