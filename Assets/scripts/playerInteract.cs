@@ -133,7 +133,7 @@ public class playerInteract : MonoBehaviour
                 }
 
                 break;
-            case "lås":
+            case "lock":
                 StartCoroutine(MoveCameraPos(LåsCamPos));
                 break;
                 // l�gg till fler object/tag h�r
