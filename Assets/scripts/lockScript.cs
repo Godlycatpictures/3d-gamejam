@@ -20,42 +20,50 @@ public class lockScript : MonoBehaviour
         num1 = addNUM(num1);
 
         num1Text.text = num1.ToString();
+        checkLock();
 
     }
     public void subnum1()
     {
         num1 = subNUM(num1);
         num1Text.text = num1.ToString();
+        checkLock();
     }
     public void addnum2()
     {
         num2 = addNUM(num2);
         num2Text.text = num2.ToString();
+        checkLock();
     }
     public void subnum2()
     {
         num2 = subNUM(num2);
         num2Text.text = num2.ToString();
+        checkLock();
     }
     public void addnum3()
     {
         num3 = addNUM(num3);
         num3Text.text = num3.ToString();
+        checkLock();
     }
     public void subnum3()
     {
         num3 = subNUM(num3);
         num3Text.text = num3.ToString();
+        checkLock();
     }
     public void addnum4()
     {
        num4 = addNUM(num4);
         num4Text.text = num4.ToString();
+        checkLock();
     }
     public void subnum4()
     {
         num4 = subNUM(num4);
         num4Text.text = num4.ToString();
+        checkLock();
     }
 
 
@@ -82,7 +90,7 @@ public class lockScript : MonoBehaviour
         if (num1 == correctNum1 && num2 == correctNum2 && num3 == correctNum3 && num4 == correctNum4)
         {
             isUnlocked = true;
-            lockCanvas.enabled = false;
+          
             playerInteractScript = GameObject.Find("Player").GetComponent<playerInteract>();
             playerInteractScript.SmoothCamExit();
 
