@@ -14,8 +14,12 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private Transform ShelfCamPos; // cameraposition f�r hyllan
     [SerializeField] private Transform VentCamPos; // cameraposition f�r ventilen
 
+    private Transform LastCamPos; // för att titta vilken cam pos var senast (ex veta om man går fårn shelf till player)
+
     [Header("Items")]
     [SerializeField] private bool hasScrewdriver = false;
+
+    [SerializeField] private ShelfLogic ShelfLogic;
 
     private bool CamIsOnTheMove = false;
     private Quaternion CamPosPreInteract;
@@ -28,6 +32,7 @@ public class playerInteract : MonoBehaviour
     {
         movementScript = GetComponent<playerMovment>();
         mainCam = Camera.main;
+        ShelfLogic = FindFirstObjectByType<ShelfLogic>();
     }
     private void Update()
     {
@@ -85,8 +90,17 @@ public class playerInteract : MonoBehaviour
                 break;
 
             case "shelf":
-
-                StartCoroutine(MoveCameraPos(ShelfCamPos)); // h�r f�r du l�gga in en ny cameraposition
+                LastCamPos = ShelfCamPos;
+                StartCoroutine(MoveCameraPos(ShelfCamPos));
+                if (ShelfLogic.HasShelfKey == true)
+                {
+                     ShelfLogic.DrawerOpen();
+                } else
+                {
+                    SmoothCamExit();
+                    Debug.Log("You are not capable of opening the drawer"); // man har inte nyckel
+                }
+                
                 break;
 
             case "vent":
@@ -120,7 +134,7 @@ public class playerInteract : MonoBehaviour
 
     }
     
-    private void SmoothCamExit()
+    public void SmoothCamExit() // public så andra kan exita den
     {
 
         StartCoroutine(MoveCameraPos(PlayerCamPos));
@@ -158,7 +172,14 @@ public class playerInteract : MonoBehaviour
         if (target == PlayerCamPos)
         {
             FreeCamera();
+            
         }
+
+        if (LastCamPos == ShelfCamPos && target == PlayerCamPos)
+        {
+            ShelfLogic.DrawerClose();
+        }
+        
 
         CamIsOnTheMove = false;
     }

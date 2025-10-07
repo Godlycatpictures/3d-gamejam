@@ -1362,6 +1362,9 @@ MonoBehaviour:
   ComputerCamPos: {fileID: 1024264699}
   PlayerCamPos: {fileID: 1448212374}
   ShelfCamPos: {fileID: 1270409018}
+  VentCamPos: {fileID: 0}
+  hasScrewdriver: 0
+  ShelfLogic: {fileID: 0}
 --- !u!1 &446336259
 GameObject:
   m_ObjectHideFlags: 0
@@ -4139,8 +4142,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.55, y: 0.62, z: 1.42}
-  m_Center: {x: 0, y: 0, z: 0.74}
+  m_Size: {x: 0.46999997, y: 0.5227032, z: -1.71}
+  m_Center: {x: 0, y: -0.0063516023, z: 0.5372516}
 --- !u!95 &1511433878
 Animator:
   serializedVersion: 7
@@ -4175,6 +4178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e25a1f44c5a404e9edae7050872ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HasShelfKey: 1
 --- !u!1 &1599394857
 GameObject:
   m_ObjectHideFlags: 0
