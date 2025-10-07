@@ -3,68 +3,44 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class FootstepSounds : MonoBehaviour
 {
-    [Header("Audio Settings")]
     public AudioSource audioSource;
     public AudioClip[] footstepClips;
-    public float stepInterval = 0.5f;
-
-    [Header("Player Settings")]
     public Rigidbody rb;
     public LayerMask groundLayer;
-    public float groundCheckDistance = 2.0f;
-    public float minSpeedToStep = 0.2f;
+    public float groundCheckDistance = 2f;
 
-    private float stepTimer;
-
-    void Start()
-
+    private void Start()
     {
-        // Hämta komponenter om de inte är manuellt tillagda
-        if (audioSource == null)
-            audioSource = GetComponent<AudioSource>();
-        if (rb != null)
-            rb = GetComponent<Rigidbody>();
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
+        if (rb == null) rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    private void Update()
     {
-        // Skicka raycast från lite ovanför botten av spelaren
-        bool isGrounded = Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, groundCheckDistance, groundLayer);
-
-        // Kolla spelarens hastighet
+        Vector3 rayOrigin = transform.position + Vector3.up * 0.1f; // Lägre startpunkt
+        bool isGrounded = Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, groundCheckDistance, groundLayer);
         float speed = rb.linearVelocity.magnitude;
 
-        // Debug för att se vad som händer (ta bort om du vill)
-        // Debug.Log($"Grounded: {isGrounded} | Speed: {speed}");
+        Debug.DrawRay(rayOrigin, Vector3.down * groundCheckDistance, isGrounded ? Color.green : Color.red);
+        Debug.Log($"Grounded: {isGrounded} | Speed: {speed} | Audio: {(audioSource != null)}");
 
-        // Spela fotsteg om man rör sig på marken
-        if (isGrounded && speed > minSpeedToStep)
+        if (Input.GetKeyDown(KeyCode.G))
         {
-            stepTimer += Time.deltaTime;
-
-            if (stepTimer >= stepInterval)
+            if (footstepClips.Length > 0)
             {
-                PlayFootstep();
-                stepTimer = 0f;
+                Debug.Log("Manual Footstep test!");
+                audioSource.PlayOneShot(footstepClips[Random.Range(0, footstepClips.Length)]);
             }
         }
-        else
+
+        if (isGrounded && speed > 0.2f)
         {
-            stepTimer = 0f;
+            if (!audioSource.isPlaying)
+            {
+                audioSource.pitch = Random.Range(0.9f, 1.1f);
+                audioSource.PlayOneShot(footstepClips[Random.Range(0, footstepClips.Length)]);
+                Debug.Log("Auto Footstep played!");
+            }
         }
-    }
-
-    void PlayFootstep()
-    {
-        if (footstepClips.Length == 0) return;
-
-        int index = Random.Range(0, footstepClips.Length);
-        AudioClip clip = footstepClips[index];
-
-        // Lite variation i pitch för mer naturligt ljud
-        audioSource.pitch = Random.Range(0.9f, 1.1f);
-        audioSource.PlayOneShot(clip);
-
-        // Debug.Log("Footstep: " + clip.name);
     }
 }
