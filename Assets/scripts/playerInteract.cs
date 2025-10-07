@@ -61,7 +61,7 @@ public class playerInteract : MonoBehaviour
         }
         else
         {
-            PlayerUIScript.TextToggle(false);
+            PlayerUIScript.TextToggle(false); // scenen måste ha PlayerUI prefab för att den ska fungera, annars skiter sig allt
         }
 
         if (isInteracting && Input.GetKeyDown(KeyCode.Escape) && !CamIsOnTheMove)
