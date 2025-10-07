@@ -31,8 +31,8 @@ public class playerInteract : MonoBehaviour
     }
     private void Update()
     {
-        Physics.Raycast(orientation.position, orientation.forward, out RaycastHit hit, interactRange, whatIsInteractable);
-        Debug.DrawRay(orientation.position, orientation.forward * interactRange, Color.red);
+        Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out RaycastHit hit, interactRange, whatIsInteractable);
+        Debug.DrawRay(mainCam.transform.position, mainCam.transform.forward * interactRange, Color.red);
 
         if (hit.collider != null)
         {
