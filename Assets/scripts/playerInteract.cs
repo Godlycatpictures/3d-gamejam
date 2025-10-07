@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -21,6 +21,7 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private bool hasScrewdriver = false;
 
     [SerializeField] private ShelfLogic ShelfLogic;
+    [SerializeField] private PlayerUIScript PlayerUIScript;
 
     private bool CamIsOnTheMove = false;
     private Quaternion CamPosPreInteract;
@@ -29,33 +30,44 @@ public class playerInteract : MonoBehaviour
     private playerMovment movementScript;
 
 
+
     private void Start()
     {
         movementScript = GetComponent<playerMovment>();
         mainCam = Camera.main;
         ShelfLogic = FindFirstObjectByType<ShelfLogic>();
+        PlayerUIScript = FindFirstObjectByType<PlayerUIScript>();
     }
     private void Update()
     {
         Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out RaycastHit hit, interactRange, whatIsInteractable);
         Debug.DrawRay(mainCam.transform.position, mainCam.transform.forward * interactRange, Color.red);
 
-        if (hit.collider != null)
+        if (!isInteracting && hit.collider != null)
         {
+            string interaction_text = hit.collider.tag;
+            PlayerUIScript.TextToggle(true);
+            PlayerUIScript.ChangeUIText(interaction_text, "E");
+
 
             if (Input.GetKeyDown(KeyCode.E) && !CamIsOnTheMove)
             {
+                PlayerUIScript.TextToggle(false);
                 isInteracting = true;
                 LockCamera();
                 WhatWasInteracted(hit.collider.gameObject); // skickar interactables gameObject till saken
             }
 
         }
+        else
+        {
+            PlayerUIScript.TextToggle(false); // scenen måste ha PlayerUI prefab för att den ska fungera, annars skiter sig allt
+        }
 
         if (isInteracting && Input.GetKeyDown(KeyCode.Escape) && !CamIsOnTheMove)
         {
             SmoothCamExit();
-            
+
         }
 
 
@@ -79,7 +91,7 @@ public class playerInteract : MonoBehaviour
 
     private void WhatWasInteracted(GameObject currentInteractable) // borde heta changeCamPos men orka
     {
-        
+
         string currentInteractableTag = currentInteractable.tag;
         Debug.Log("interactable tag: " + currentInteractableTag);
         switch (currentInteractableTag)
@@ -124,7 +136,7 @@ public class playerInteract : MonoBehaviour
             case "lås":
                 StartCoroutine(MoveCameraPos(LåsCamPos));
                 break;
-            // l�gg till fler object/tag h�r
+                // l�gg till fler object/tag h�r
         }
     }
 
@@ -138,7 +150,7 @@ public class playerInteract : MonoBehaviour
         Cursor.visible = false;
 
     }
-    
+
     public void SmoothCamExit() // public så andra kan exita den
     {
 
@@ -148,7 +160,7 @@ public class playerInteract : MonoBehaviour
     private void CamToPlayer()
     {
         mainCam.transform.position = PlayerCamPos.position; // �terg� till original position
-        
+
     }
 
     private IEnumerator MoveCameraPos(Transform target)
@@ -166,7 +178,7 @@ public class playerInteract : MonoBehaviour
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.SmoothStep(0,1, elapsed/duration); // fr�ga inte, matte �r sv�rt
+            float t = Mathf.SmoothStep(0, 1, elapsed / duration); // fr�ga inte, matte �r sv�rt
             mainCam.transform.position = Vector3.Lerp(CamStartPos, target.position, t);
             mainCam.transform.rotation = Quaternion.Lerp(CamStartRot, targetRot, t);
             yield return null;
@@ -177,14 +189,14 @@ public class playerInteract : MonoBehaviour
         if (target == PlayerCamPos)
         {
             FreeCamera();
-            
+
         }
 
         /*if (LastCamPos == ShelfCamPos && target == PlayerCamPos)
         {
             ShelfLogic.DrawerClose();
         }*/
-        
+
 
         CamIsOnTheMove = false;
     }

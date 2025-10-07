@@ -1,8 +1,11 @@
 using UnityEngine;
 
+
+
 public class MailManager : MonoBehaviour
 {
     [SerializeField] GameObject mail1, mail2, mail3;
+    
     public void OpenMail(string name)
     {
         CloseAllMail();
