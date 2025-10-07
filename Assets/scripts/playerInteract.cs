@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -8,13 +8,6 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private float interactRange;
     [SerializeField] private Transform orientation;
     [SerializeField] private Camera mainCam;
-<<<<<<< HEAD
-    [Header("Camera Positions")] // lägg till felr positioner för interactables
-    [SerializeField] private Transform ComputerCamPos; // cameraposition för datorn
-    [SerializeField] private Transform PlayerCamPos; // Kamera återgå till spelaren efter interaction
-   
-
-=======
     [Header("Camera Positions")] // lï¿½gg till felr positioner fï¿½r interactables
     [SerializeField] private Transform ComputerCamPos; // cameraposition fï¿½r datorn
     [SerializeField] private Transform PlayerCamPos; // Kamera ï¿½tergï¿½ till spelaren efter interaction
@@ -28,7 +21,6 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private bool hasScrewdriver = false;
 
     [SerializeField] private ShelfLogic ShelfLogic;
->>>>>>> main
 
     private bool CamIsOnTheMove = false;
     private Quaternion CamPosPreInteract;
@@ -36,10 +28,6 @@ public class playerInteract : MonoBehaviour
     private bool isInteracting = false;
     private playerMovment movementScript;
 
-    [Header("Audio")]
-    public AudioSource audioSource;
-    public AudioClip mouseClickSound;
-    public AudioClip startupSound;
 
 
     private void Start()
@@ -68,7 +56,7 @@ public class playerInteract : MonoBehaviour
         if (isInteracting && Input.GetKeyDown(KeyCode.Escape) && !CamIsOnTheMove)
         {
             SmoothCamExit();
-            
+
         }
 
 
@@ -78,11 +66,6 @@ public class playerInteract : MonoBehaviour
             CamToPlayer();
         }
 
-        if (isInteracting && Input.GetMouseButtonDown(0))
-        {
-            PlayClickSound();
-            // Här kan du lägga din befintliga kod som klickar på appar
-        }
 
     }
 
@@ -97,7 +80,7 @@ public class playerInteract : MonoBehaviour
 
     private void WhatWasInteracted(GameObject currentInteractable) // borde heta changeCamPos men orka
     {
-        
+
         string currentInteractableTag = currentInteractable.tag;
         Debug.Log("interactable tag: " + currentInteractableTag);
         switch (currentInteractableTag)
@@ -142,7 +125,7 @@ public class playerInteract : MonoBehaviour
             case "lÃ¥s":
                 StartCoroutine(MoveCameraPos(LÃ¥sCamPos));
                 break;
-            // lï¿½gg till fler object/tag hï¿½r
+                // lï¿½gg till fler object/tag hï¿½r
         }
     }
 
@@ -156,7 +139,7 @@ public class playerInteract : MonoBehaviour
         Cursor.visible = false;
 
     }
-    
+
     public void SmoothCamExit() // public sÃ¥ andra kan exita den
     {
 
@@ -166,7 +149,7 @@ public class playerInteract : MonoBehaviour
     private void CamToPlayer()
     {
         mainCam.transform.position = PlayerCamPos.position; // ï¿½tergï¿½ till original position
-        
+
     }
 
     private IEnumerator MoveCameraPos(Transform target)
@@ -184,7 +167,7 @@ public class playerInteract : MonoBehaviour
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.SmoothStep(0,1, elapsed/duration); // frï¿½ga inte, matte ï¿½r svï¿½rt
+            float t = Mathf.SmoothStep(0, 1, elapsed / duration); // frï¿½ga inte, matte ï¿½r svï¿½rt
             mainCam.transform.position = Vector3.Lerp(CamStartPos, target.position, t);
             mainCam.transform.rotation = Quaternion.Lerp(CamStartRot, targetRot, t);
             yield return null;
@@ -195,26 +178,15 @@ public class playerInteract : MonoBehaviour
         if (target == PlayerCamPos)
         {
             FreeCamera();
-            
+
         }
 
         /*if (LastCamPos == ShelfCamPos && target == PlayerCamPos)
         {
             ShelfLogic.DrawerClose();
         }*/
-        
+
 
         CamIsOnTheMove = false;
     }
-
-    private void PlayClickSound()
-    {
-        if (audioSource != null && mouseClickSound != null)
-        {
-            audioSource.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
-            audioSource.PlayOneShot(mouseClickSound);
-        }
-    }
-
-
 }
