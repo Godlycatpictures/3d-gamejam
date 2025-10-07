@@ -20,6 +20,7 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private bool hasScrewdriver = false;
 
     [SerializeField] private ShelfLogic ShelfLogic;
+    [SerializeField] private PlayerUIScript PlayerUIScript;
 
     private bool CamIsOnTheMove = false;
     private Quaternion CamPosPreInteract;
@@ -33,22 +34,32 @@ public class playerInteract : MonoBehaviour
         movementScript = GetComponent<playerMovment>();
         mainCam = Camera.main;
         ShelfLogic = FindFirstObjectByType<ShelfLogic>();
+        PlayerUIScript = FindFirstObjectByType<PlayerUIScript>();
     }
     private void Update()
     {
         Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out RaycastHit hit, interactRange, whatIsInteractable);
         Debug.DrawRay(mainCam.transform.position, mainCam.transform.forward * interactRange, Color.red);
 
-        if (hit.collider != null)
+        if (!isInteracting && hit.collider != null)
         {
+            string interaction_text = hit.collider.tag;
+            PlayerUIScript.TextToggle(true);
+            PlayerUIScript.ChangeUIText(interaction_text, "E");
+
 
             if (Input.GetKeyDown(KeyCode.E) && !CamIsOnTheMove)
             {
+                PlayerUIScript.TextToggle(false);
                 isInteracting = true;
                 LockCamera();
                 WhatWasInteracted(hit.collider.gameObject); // skickar interactables gameObject till saken
             }
 
+        }
+        else
+        {
+            PlayerUIScript.TextToggle(false);
         }
 
         if (isInteracting && Input.GetKeyDown(KeyCode.Escape) && !CamIsOnTheMove)
