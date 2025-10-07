@@ -11,12 +11,19 @@ public class playerInteract : MonoBehaviour
     [Header("Camera Positions")] // lägg till felr positioner för interactables
     [SerializeField] private Transform ComputerCamPos; // cameraposition för datorn
     [SerializeField] private Transform PlayerCamPos; // Kamera återgå till spelaren efter interaction
+   
+
 
     private bool CamIsOnTheMove = false;
     private Quaternion CamPosPreInteract;
 
     private bool isInteracting = false;
     private playerMovment movementScript;
+
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip mouseClickSound;
+    public AudioClip startupSound;
 
 
     private void Start()
@@ -53,6 +60,11 @@ public class playerInteract : MonoBehaviour
             CamToPlayer();
         }
 
+        if (isInteracting && Input.GetMouseButtonDown(0))
+        {
+            PlayClickSound();
+            // Här kan du lägga din befintliga kod som klickar på appar
+        }
 
     }
 
@@ -132,4 +144,15 @@ public class playerInteract : MonoBehaviour
 
         CamIsOnTheMove = false;
     }
+
+    private void PlayClickSound()
+    {
+        if (audioSource != null && mouseClickSound != null)
+        {
+            audioSource.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+            audioSource.PlayOneShot(mouseClickSound);
+        }
+    }
+
+
 }

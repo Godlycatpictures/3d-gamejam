@@ -21,8 +21,8 @@ public class FootstepSounds : MonoBehaviour
         bool isGrounded = Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, groundCheckDistance, groundLayer);
         float speed = rb.linearVelocity.magnitude;
 
-        Debug.DrawRay(rayOrigin, Vector3.down * groundCheckDistance, isGrounded ? Color.green : Color.red);
-        Debug.Log($"Grounded: {isGrounded} | Speed: {speed} | Audio: {(audioSource != null)}");
+        //Debug.DrawRay(rayOrigin, Vector3.down * groundCheckDistance, isGrounded ? Color.green : Color.red);
+        //Debug.Log($"Grounded: {isGrounded} | Speed: {speed} | Audio: {(audioSource != null)}");
 
         if (Input.GetKeyDown(KeyCode.G))
         {
