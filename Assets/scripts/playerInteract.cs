@@ -13,6 +13,7 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private Transform PlayerCamPos; // Kamera �terg� till spelaren efter interaction
     [SerializeField] private Transform ShelfCamPos; // cameraposition f�r hyllan
     [SerializeField] private Transform VentCamPos; // cameraposition f�r ventilen
+    [SerializeField] private Transform LåsCamPos; // cameraposition f�r låset
 
     private Transform LastCamPos; // för att titta vilken cam pos var senast (ex veta om man går fårn shelf till player)
 
@@ -94,13 +95,14 @@ public class playerInteract : MonoBehaviour
                 StartCoroutine(MoveCameraPos(ShelfCamPos));
                 if (ShelfLogic.HasShelfKey == true)
                 {
-                     ShelfLogic.DrawerOpen();
-                } else
+                    ShelfLogic.DrawerOpen();
+                }
+                else
                 {
                     SmoothCamExit();
                     Debug.Log("You are not capable of opening the drawer"); // man har inte nyckel
                 }
-                
+
                 break;
 
             case "vent":
@@ -110,14 +112,17 @@ public class playerInteract : MonoBehaviour
                     //Ändra destroy till typ gå in i venten eller liknande
                     Destroy(currentInteractable);
                     SmoothCamExit();
-                   
+
                 }
                 else
                 {
                     Debug.Log("You need a screwdriver to open this vent");
 
                 }
-                
+
+                break;
+            case "lås":
+                StartCoroutine(MoveCameraPos(LåsCamPos));
                 break;
             // l�gg till fler object/tag h�r
         }
@@ -175,10 +180,10 @@ public class playerInteract : MonoBehaviour
             
         }
 
-        if (LastCamPos == ShelfCamPos && target == PlayerCamPos)
+        /*if (LastCamPos == ShelfCamPos && target == PlayerCamPos)
         {
             ShelfLogic.DrawerClose();
-        }
+        }*/
         
 
         CamIsOnTheMove = false;
