@@ -7,6 +7,7 @@ TagManager:
   - computer
   - shelf
   - vent
+  - "l\xE5s"
   layers:
   - Default
   - TransparentFX
