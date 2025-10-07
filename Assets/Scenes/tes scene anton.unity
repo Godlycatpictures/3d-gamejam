@@ -8759,6 +8759,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3080592159566325189, guid: bbf30aaef4ffc0d419ee89ea31e94357, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7359943879085318996, guid: bbf30aaef4ffc0d419ee89ea31e94357, type: 3}
       propertyPath: m_Name
       value: PlayerUI
