@@ -33,7 +33,7 @@ public class playerInteract : MonoBehaviour
     {
         Physics.Raycast(orientation.position, orientation.forward, out RaycastHit hit, interactRange, whatIsInteractable);
         Debug.DrawRay(orientation.position, orientation.forward * interactRange, Color.red);
-        
+
         if (hit.collider != null)
         {
 
@@ -49,7 +49,7 @@ public class playerInteract : MonoBehaviour
         if (isInteracting && Input.GetKeyDown(KeyCode.Escape) && !CamIsOnTheMove)
         {
             SmoothCamExit();
-            
+
         }
 
 
@@ -73,7 +73,7 @@ public class playerInteract : MonoBehaviour
 
     private void WhatWasInteracted(GameObject currentInteractable) // borde heta changeCamPos men orka
     {
-        
+
         string currentInteractableTag = currentInteractable.tag;
         Debug.Log("interactable tag: " + currentInteractableTag);
         switch (currentInteractableTag)
@@ -96,16 +96,16 @@ public class playerInteract : MonoBehaviour
                     //Ändra destroy till typ gå in i venten eller liknande
                     Destroy(currentInteractable);
                     SmoothCamExit();
-                   
+
                 }
                 else
                 {
                     Debug.Log("You need a screwdriver to open this vent");
 
                 }
-                
+
                 break;
-            // l�gg till fler object/tag h�r
+                // l�gg till fler object/tag h�r
         }
     }
 
@@ -119,7 +119,7 @@ public class playerInteract : MonoBehaviour
         Cursor.visible = false;
 
     }
-    
+
     private void SmoothCamExit()
     {
 
@@ -129,7 +129,7 @@ public class playerInteract : MonoBehaviour
     private void CamToPlayer()
     {
         mainCam.transform.position = PlayerCamPos.position; // �terg� till original position
-        
+
     }
 
     private IEnumerator MoveCameraPos(Transform target)
@@ -147,7 +147,7 @@ public class playerInteract : MonoBehaviour
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.SmoothStep(0,1, elapsed/duration); // fr�ga inte, matte �r sv�rt
+            float t = Mathf.SmoothStep(0, 1, elapsed / duration); // fr�ga inte, matte �r sv�rt
             mainCam.transform.position = Vector3.Lerp(CamStartPos, target.position, t);
             mainCam.transform.rotation = Quaternion.Lerp(CamStartRot, targetRot, t);
             yield return null;
@@ -162,4 +162,5 @@ public class playerInteract : MonoBehaviour
 
         CamIsOnTheMove = false;
     }
+
 }
