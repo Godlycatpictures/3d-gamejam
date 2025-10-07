@@ -120,7 +120,7 @@ public class playerInteract : MonoBehaviour
 
     }
 
-    private void SmoothCamExit()
+   public void SmoothCamExit()
     {
 
         StartCoroutine(MoveCameraPos(PlayerCamPos));
