@@ -24,14 +24,12 @@ public class timerManager : MonoBehaviour
         {
             timer += Time.deltaTime;
         }   
-        // There are 600 seconds in 10 minutes (10 * 60 = 600)
+        
         if (timer >= 600f)
         {
             isRunning = false;
             Debug.Log("Timer reached 10 minutes!");
-            //if qutoa = klar + man är på plats = ingen punishment else punishment
-            //reset timer
-            //ny dag etc
+           
         }
     }
 
