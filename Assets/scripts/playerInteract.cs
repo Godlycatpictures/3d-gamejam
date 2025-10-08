@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerInteract : MonoBehaviour
 {
@@ -8,12 +9,17 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private float interactRange;
     [SerializeField] private Transform orientation;
     [SerializeField] private Camera mainCam;
+
+    [Header("Transition")]
+    [SerializeField] private Image transitionImage;
+    [SerializeField] private float transitionSpeed = 1f;
     [Header("Camera Positions")] // l�gg till felr positioner f�r interactables
     [SerializeField] private Transform ComputerCamPos; // cameraposition f�r datorn
     [SerializeField] private Transform PlayerCamPos; // Kamera �terg� till spelaren efter interaction
     [SerializeField] private Transform ShelfCamPos; // cameraposition f�r hyllan
     [SerializeField] private Transform VentCamPos; // cameraposition f�r ventilen
     [SerializeField] private Transform LåsCamPos; // cameraposition f�r låset
+
 
     private Transform LastCamPos; // för att titta vilken cam pos var senast (ex veta om man går fårn shelf till player)
 
@@ -22,6 +28,8 @@ public class playerInteract : MonoBehaviour
 
     [SerializeField] private ShelfLogic ShelfLogic;
     [SerializeField] private PlayerUIScript PlayerUIScript;
+    [SerializeField] private Transform ventPos1, ventPos2;
+    private Transform currentVentPos = null;
 
     private bool CamIsOnTheMove = false;
     private Quaternion CamPosPreInteract;
@@ -32,6 +40,7 @@ public class playerInteract : MonoBehaviour
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip mouseClickSound;
+    [SerializeField] private AudioClip[] ventSounds;
 
 
     private void Start()
@@ -40,6 +49,7 @@ public class playerInteract : MonoBehaviour
         mainCam = Camera.main;
         ShelfLogic = FindFirstObjectByType<ShelfLogic>();
         PlayerUIScript = FindFirstObjectByType<PlayerUIScript>();
+        currentVentPos = ventPos1;
     }
     private void Update()
     {
@@ -129,9 +139,9 @@ public class playerInteract : MonoBehaviour
                 StartCoroutine(MoveCameraPos(VentCamPos));
                 if (hasScrewdriver)
                 {
-                    //Ändra destroy till typ gå in i venten eller liknande
-                    Destroy(currentInteractable);
                     SmoothCamExit();
+                    ventMove();
+                   
 
                 }
                 else
@@ -214,6 +224,80 @@ public class playerInteract : MonoBehaviour
         {
             audioSource.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
             audioSource.PlayOneShot(mouseClickSound);
+        }
+    }
+    private void ventMove()
+    {
+        if (currentVentPos == ventPos1)
+        {
+            currentVentPos = ventPos2;
+        }
+        else
+        {
+            currentVentPos = ventPos1;
+
+        }
+        ventTransition();
+
+
+
+    }
+    private void VentSound()
+    {
+
+        int randSound = UnityEngine.Random.Range(0, ventSounds.Length);
+        audioSource.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+        audioSource.PlayOneShot(ventSounds[randSound]);
+    }
+    private void ventTransition()
+    {
+        StartCoroutine(ventTransitionCo());
+    }
+    private IEnumerator ventTransitionCo()
+    {
+        StartCoroutine(FadetoBlack(1f));
+
+        yield return new WaitForSeconds(transitionSpeed);
+
+        transform.position = currentVentPos.position;
+        StartCoroutine(FadetoBlack(0f));
+
+    }
+    private IEnumerator FadetoBlack(float targetAlpha)
+    {
+        if (movementScript == null)
+        {
+            movementScript = GetComponent<playerMovment>();
+        }
+        if (movementScript != null)
+        {
+            movementScript.canMove = false;
+        }
+        Color color = transitionImage.color;
+        float startAlpha = color.a;
+        float elapsed = 0f;
+        float nextCheck = 0.1f;
+
+        while (elapsed < transitionSpeed)
+        {
+
+            elapsed += Time.deltaTime;
+            float t = elapsed / transitionSpeed;
+            color.a = Mathf.Lerp(startAlpha, targetAlpha, t);
+            transitionImage.color = color;
+            if (elapsed >= nextCheck)
+            {
+                VentSound();
+                nextCheck += 0.1f;
+
+            }
+            yield return null;
+        }
+        color.a = targetAlpha;
+        transitionImage.color = color;
+        if (movementScript != null)
+        {
+            movementScript.canMove = true;
         }
     }
 }
