@@ -11,6 +11,7 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private Camera mainCam;
 
     [Header("Transition")]
+    private bool isTransitioning = false;
     [SerializeField] private Image transitionImage;
     [SerializeField] private float transitionSpeed = 1f;
     [Header("Camera Positions")] // l�gg till felr positioner f�r interactables
@@ -136,16 +137,17 @@ public class playerInteract : MonoBehaviour
                 break;
 
             case "vent":
-                StartCoroutine(MoveCameraPos(VentCamPos));
+               
                 if (hasScrewdriver)
                 {
-                    SmoothCamExit();
+                   FreeCamera();
                     ventMove();
                    
 
                 }
                 else
                 {
+                    FreeCamera();
                     Debug.Log("You need a screwdriver to open this vent");
 
                 }
@@ -228,16 +230,20 @@ public class playerInteract : MonoBehaviour
     }
     private void ventMove()
     {
+        if (isTransitioning) return; 
+
         if (currentVentPos == ventPos1)
         {
+            Debug.Log("going to vent 2");
             currentVentPos = ventPos2;
         }
         else
         {
+            Debug.Log("going to vent 1");
             currentVentPos = ventPos1;
 
         }
-        ventTransition();
+        StartCoroutine(ventTransitionCo());
 
 
 
@@ -249,22 +255,13 @@ public class playerInteract : MonoBehaviour
         audioSource.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
         audioSource.PlayOneShot(ventSounds[randSound]);
     }
-    private void ventTransition()
-    {
-        StartCoroutine(ventTransitionCo());
-    }
+
+
+
+
     private IEnumerator ventTransitionCo()
     {
-        StartCoroutine(FadetoBlack(1f));
-
-        yield return new WaitForSeconds(transitionSpeed);
-
-        transform.position = currentVentPos.position;
-        StartCoroutine(FadetoBlack(0f));
-
-    }
-    private IEnumerator FadetoBlack(float targetAlpha)
-    {
+        isTransitioning = true;
         if (movementScript == null)
         {
             movementScript = GetComponent<playerMovment>();
@@ -273,6 +270,20 @@ public class playerInteract : MonoBehaviour
         {
             movementScript.canMove = false;
         }
+        yield return StartCoroutine(FadetoBlack(1f));
+        transform.position = currentVentPos.position;
+        yield return StartCoroutine(FadetoBlack(0f));
+
+        if (movementScript != null)
+        {
+            movementScript.canMove = true;
+        }
+        isTransitioning = false;
+        
+    }
+    private IEnumerator FadetoBlack(float targetAlpha)
+    {
+        transitionImage.gameObject.SetActive(true);
         Color color = transitionImage.color;
         float startAlpha = color.a;
         float elapsed = 0f;
@@ -288,16 +299,14 @@ public class playerInteract : MonoBehaviour
             if (elapsed >= nextCheck)
             {
                 VentSound();
-                nextCheck += 0.1f;
+                nextCheck += 0.3f;
 
             }
             yield return null;
         }
         color.a = targetAlpha;
         transitionImage.color = color;
-        if (movementScript != null)
-        {
-            movementScript.canMove = true;
-        }
+        transitionImage.gameObject.SetActive(false);
+      
     }
 }
