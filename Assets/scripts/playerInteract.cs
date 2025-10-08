@@ -29,6 +29,9 @@ public class playerInteract : MonoBehaviour
     private bool isInteracting = false;
     private playerMovment movementScript;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip mouseClickSound;
 
 
     private void Start()
@@ -77,6 +80,11 @@ public class playerInteract : MonoBehaviour
             CamToPlayer();
         }
 
+        if (isInteracting && Input.GetMouseButtonDown(0))
+        {
+            PlayClickSound();
+            // H r kan du l gga din befintliga kod som klickar p  appar
+        }
 
     }
 
@@ -199,5 +207,13 @@ public class playerInteract : MonoBehaviour
 
 
         CamIsOnTheMove = false;
+    }
+    private void PlayClickSound()
+    {
+        if (audioSource != null && mouseClickSound != null)
+        {
+            audioSource.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+            audioSource.PlayOneShot(mouseClickSound);
+        }
     }
 }
