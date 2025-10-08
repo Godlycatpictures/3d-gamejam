@@ -118,55 +118,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: NewNotebookUI_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 300
-        width: 400
-        height: 300
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2be6040392b9de14a954e720d26e0715
-      internalID: -834882924
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NewNotebookUI_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 400
-        height: 300
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b2011e916774a344581ca0425baf40ce
-      internalID: -1195468107
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8f3f589a2b3f59749a33673b304437e7
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -177,8 +133,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       NewNotebookUI_0: -7813835499251106896
-      NewNotebookUI_1: -834882924
-      NewNotebookUI_2: -1195468107
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
