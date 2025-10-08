@@ -112,8 +112,57 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
+<<<<<<< Updated upstream
       spriteID: 0bbfccd430eaf8390800000000000000
       internalID: -7813835499251106896
+=======
+      spriteID: 4f90a83fc694de1409d8caf8486937c5
+      internalID: -131097316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewNotebookUI_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 300
+        width: 400
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49a6b79badaf134419ccf3f90b93f558
+      internalID: 1913425243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewNotebookUI_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 400
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ff7cbdd1addf1e4eb5ddb2f1b903e64
+      internalID: -345256958
+>>>>>>> Stashed changes
       vertices: []
       indices: 
       edges: []
@@ -122,7 +171,11 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
+<<<<<<< Updated upstream
     spriteID: 
+=======
+    spriteID: 16d7ded142145b9478f02c25e47a079f
+>>>>>>> Stashed changes
     internalID: 0
     vertices: []
     indices: 
@@ -132,7 +185,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+<<<<<<< Updated upstream
       NewNotebookUI_0: -7813835499251106896
+=======
+      NewNotebookUI_0: -131097316
+      NewNotebookUI_1: 1913425243
+      NewNotebookUI_2: -345256958
+>>>>>>> Stashed changes
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
