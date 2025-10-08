@@ -115,7 +115,7 @@ public class playerInteract : MonoBehaviour
                 StartCoroutine(MoveCameraPos(ShelfCamPos));
                 if (ShelfLogic.HasShelfKey == true)
                 {
-                    ShelfLogic.DrawerOpen();
+                    ShelfLogic.DrawerOpen(); // fick du en error runt här ish?, lägg till shelf i din scen
                 }
                 else
                 {
@@ -200,10 +200,10 @@ public class playerInteract : MonoBehaviour
 
         }
 
-        /*if (LastCamPos == ShelfCamPos && target == PlayerCamPos)
+        if (LastCamPos == ShelfCamPos && target == PlayerCamPos)
         {
-            ShelfLogic.DrawerClose();
-        }*/
+            ShelfLogic.DrawerClose(); // fick du en error runt här ish?, lägg till shelf i din scen
+        }
 
 
         CamIsOnTheMove = false;
