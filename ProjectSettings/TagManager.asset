@@ -8,6 +8,7 @@ TagManager:
   - shelf
   - vent
   - "l\xE5s"
+  - lock
   layers:
   - Default
   - TransparentFX
