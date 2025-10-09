@@ -127,6 +127,7 @@ public class playerInteract : MonoBehaviour
                 StartCoroutine(MoveCameraPos(ShelfCamPos));
                 if (ShelfLogic.HasShelfKey == true)
                 {
+                    hasScrewdriver = true;
                     ShelfLogic.DrawerOpen(); // fick du en error runt här ish?, lägg till shelf i din scen
                 }
                 else
