@@ -266,7 +266,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e25a1f44c5a404e9edae7050872ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasShelfKey: 1
+  audioSource: {fileID: 0}
+  HasShelfKey: 0
+  openCabinet: {fileID: 0}
+  closeCabinet: {fileID: 0}
 --- !u!4 &4329327813869939551 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2774220344278030320, guid: b52fa786bd0570324ae4faecb603b84e, type: 3}

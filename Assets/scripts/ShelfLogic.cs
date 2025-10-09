@@ -13,6 +13,7 @@ public class ShelfLogic : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        HasShelfKey = false;
         anim = GetComponent<Animator>();
         playerInteract = FindFirstObjectByType<playerInteract>();
     }
