@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class QuitGameManager : MonoBehaviour
 {
-    void QuitGame()
+    public void QuitGame()
     {
         Application.Quit();
     }
