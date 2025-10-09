@@ -274,7 +274,7 @@ public class playerInteract : MonoBehaviour
         }
         yield return StartCoroutine(FadetoBlack(1f));
         transform.position = currentVentPos.position;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         yield return StartCoroutine(FadetoBlack(0f));
 
         if (movementScript != null)
