@@ -451,7 +451,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 50}
+  m_AnchoredPosition: {x: 0, y: -41}
   m_SizeDelta: {x: 75, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &53961851
@@ -1269,7 +1269,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7813835499251106896, guid: e6ad811ccf570814587e02d9c499ec18, type: 3}
+  m_Sprite: {fileID: 914121667, guid: 4ce0f9a4b3418744da391361b1bb4413, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3796,7 +3796,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 20}
+  m_AnchoredPosition: {x: 0, y: -71.000015}
   m_SizeDelta: {x: 250, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &491495430
@@ -3885,7 +3885,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: worker.mail@nexora.com
+  m_Text: employee37.mail@nexora.com
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -4160,7 +4160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 0, y: -132}
   m_SizeDelta: {x: 153.7, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &522608867
@@ -7198,13 +7198,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 53961850}
   - {fileID: 1119108822}
   - {fileID: 507570042}
   - {fileID: 1861985489}
+  - {fileID: 53961850}
   - {fileID: 491495429}
   - {fileID: 1174341357}
   - {fileID: 12838460}
+  - {fileID: 1825905618}
   m_Father: {fileID: 119021231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -7232,7 +7233,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7813835499251106896, guid: e6ad811ccf570814587e02d9c499ec18, type: 3}
+  m_Sprite: {fileID: 914121667, guid: 4ce0f9a4b3418744da391361b1bb4413, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7263,7 +7264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputText: 
-  correctPassword: opensesame
+  correctPassword: kgtdw37
   loggingInText: {fileID: 507570039}
   incorrectPasswordText: {fileID: 1861985486}
   loggedIn: {fileID: 1349395105}
@@ -7370,8 +7371,8 @@ RectTransform:
   m_GameObject: {fileID: 803263455}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 0.04996537, y: 0.5239, z: 0.5239}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.04996537, y: 0.67293125, z: 0.5239}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 114126120}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8027,7 +8028,10 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: "Skriv ledtr\xE5d h\xE4r :)"
+  m_Text: 'in case i forget my password...
+
+    the initials from my favourite motivational
+    quote + my employee number'
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -9032,8 +9036,8 @@ RectTransform:
   m_GameObject: {fileID: 1012676555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.000000008381903}
-  m_LocalScale: {x: 0.0497653, y: 0.54159, z: 0.54159}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.0497653, y: 0.5489556, z: 0.54159}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 114126120}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9266,8 +9270,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: ...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1837bf2074fc04447b9e834fc310e535, type: 2}
+  m_sharedMaterial: {fileID: 579733882048580067, guid: 1837bf2074fc04447b9e834fc310e535, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9944,7 +9948,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -15}
+  m_AnchoredPosition: {x: 0, y: -106.000015}
   m_SizeDelta: {x: 250, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1174341359
@@ -11130,13 +11134,13 @@ MonoBehaviour:
 
 
     The
-    code to the cabinet lock should be 0000. The old geezer who had it before would
-    always forget it otherwise.
+    admin code to the digital lock for the filing system should be 0545. The old
+    geezer who had it before would always forget it otherwise.
 
 
-    Also, don''t take too much time on break. The
-    company might say you have a lot, but if you use it all they''ll start pressing
-    you.
+    Also, don''t
+    take too much time on break. The company might say you have a lot, but if you
+    use it all they''ll start pressing you.
 
 
     // Friendly Neighbourhood Co-worker'
@@ -13481,7 +13485,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: 1837bf2074fc04447b9e834fc310e535, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_KeepTextSelectionVisible: 0
@@ -14488,6 +14492,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812957284}
   m_CullTransparentMesh: 1
+--- !u!1 &1825905617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1825905618}
+  - component: {fileID: 1825905620}
+  - component: {fileID: 1825905619}
+  m_Layer: 5
+  m_Name: Profilepic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1825905618
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825905617}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.65625566, y: 0.65625566, z: 0.65625566}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 788550683}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 7}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1825905619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825905617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 1997903604, guid: f6099374f95da3e4e85c93c250696a70, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1825905620
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825905617}
+  m_CullTransparentMesh: 1
 --- !u!1 &1826986825
 GameObject:
   m_ObjectHideFlags: 0
@@ -14754,7 +14833,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 0, y: -131.9}
   m_SizeDelta: {x: 153.25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1868102769
@@ -14816,8 +14895,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1837bf2074fc04447b9e834fc310e535, type: 2}
+  m_sharedMaterial: {fileID: 579733882048580067, guid: 1837bf2074fc04447b9e834fc310e535, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14910,7 +14989,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1875113591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15577,7 +15656,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "worker.mail@nexora.com\u200B"
+  m_text: "employee37.mail@nexora.com\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1837bf2074fc04447b9e834fc310e535, type: 2}
   m_sharedMaterial: {fileID: 579733882048580067, guid: 1837bf2074fc04447b9e834fc310e535, type: 2}
