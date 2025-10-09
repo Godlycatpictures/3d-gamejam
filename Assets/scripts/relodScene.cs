@@ -14,9 +14,7 @@ public class relodScene : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             // ✅ Give player the trophy
-            TrophyManager.Instance.hasTrophy = true;
-            TrophyManager.Instance.UpdateTrophyState();
-
+            FindFirstObjectByType<TrophyManager>().hasTrophy = true;
             // Fade and reload
             StartCoroutine(FadetoBlack(1f));
             StartCoroutine(DelayedReload(1f));
