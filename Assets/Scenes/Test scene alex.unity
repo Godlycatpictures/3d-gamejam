@@ -1908,6 +1908,8 @@ MonoBehaviour:
   interactRange: 2
   orientation: {fileID: 724076977}
   mainCam: {fileID: 1740499207}
+  transitionImage: {fileID: 0}
+  transitionSpeed: 1
   ComputerCamPos: {fileID: 1024264699}
   PlayerCamPos: {fileID: 1448212374}
   ShelfCamPos: {fileID: 0}
@@ -1916,8 +1918,11 @@ MonoBehaviour:
   hasScrewdriver: 0
   ShelfLogic: {fileID: 0}
   PlayerUIScript: {fileID: 0}
+  ventPos1: {fileID: 0}
+  ventPos2: {fileID: 0}
   audioSource: {fileID: 0}
   mouseClickSound: {fileID: 0}
+  ventSounds: []
 --- !u!114 &402301021
 MonoBehaviour:
   m_ObjectHideFlags: 0
