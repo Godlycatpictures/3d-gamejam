@@ -10,6 +10,8 @@ TagManager:
   - "l\xE5s"
   - lock
   - poster
+  - Trophy
+  - Manager
   layers:
   - Default
   - TransparentFX
