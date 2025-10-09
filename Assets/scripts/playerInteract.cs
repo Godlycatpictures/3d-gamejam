@@ -1,6 +1,7 @@
-using System.Collections;
+ï»¿using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerInteract : MonoBehaviour
 {
@@ -8,9 +9,28 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private float interactRange;
     [SerializeField] private Transform orientation;
     [SerializeField] private Camera mainCam;
-    [Header("Camera Positions")] // lägg till felr positioner för interactables
-    [SerializeField] private Transform ComputerCamPos; // cameraposition för datorn
-    [SerializeField] private Transform PlayerCamPos; // Kamera återgå till spelaren efter interaction
+
+    [Header("Transition")]
+    private bool isTransitioning = false;
+    [SerializeField] private Image transitionImage;
+    [SerializeField] private float transitionSpeed = 1f;
+    [Header("Camera Positions")] // lï¿½gg till felr positioner fï¿½r interactables
+    [SerializeField] private Transform ComputerCamPos; // cameraposition fï¿½r datorn
+    [SerializeField] private Transform PlayerCamPos; // Kamera ï¿½tergï¿½ till spelaren efter interaction
+    [SerializeField] private Transform ShelfCamPos; // cameraposition fï¿½r hyllan
+    [SerializeField] private Transform VentCamPos; // cameraposition fï¿½r ventilen
+    [SerializeField] private Transform LÃ¥sCamPos; // cameraposition fï¿½r lÃ¥set
+
+
+    private Transform LastCamPos; // fÃ¶r att titta vilken cam pos var senast (ex veta om man gÃ¥r fÃ¥rn shelf till player)
+
+    [Header("Items")]
+    [SerializeField] private bool hasScrewdriver = false;
+
+    [SerializeField] private ShelfLogic ShelfLogic;
+    [SerializeField] private PlayerUIScript PlayerUIScript;
+    [SerializeField] private Transform ventPos1, ventPos2;
+    private Transform currentVentPos = null;
 
     private bool CamIsOnTheMove = false;
     private Quaternion CamPosPreInteract;
@@ -18,32 +38,50 @@ public class playerInteract : MonoBehaviour
     private bool isInteracting = false;
     private playerMovment movementScript;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip mouseClickSound;
+    [SerializeField] private AudioClip[] ventSounds;
+
 
     private void Start()
     {
         movementScript = GetComponent<playerMovment>();
         mainCam = Camera.main;
+        ShelfLogic = FindFirstObjectByType<ShelfLogic>();
+        PlayerUIScript = FindFirstObjectByType<PlayerUIScript>();
+        currentVentPos = ventPos1;
     }
     private void Update()
     {
-        Physics.Raycast(orientation.position, orientation.forward, out RaycastHit hit, interactRange, whatIsInteractable);
-        
-        if (hit.collider != null)
+        Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out RaycastHit hit, interactRange, whatIsInteractable);
+        Debug.DrawRay(mainCam.transform.position, mainCam.transform.forward * interactRange, Color.red);
+
+        if (!isInteracting && hit.collider != null)
         {
-            
+            string interaction_text = hit.collider.tag;
+            PlayerUIScript.TextToggle(true);
+            PlayerUIScript.ChangeUIText(interaction_text, "E");
+
+
             if (Input.GetKeyDown(KeyCode.E) && !CamIsOnTheMove)
             {
+                PlayerUIScript.TextToggle(false);
                 isInteracting = true;
                 LockCamera();
                 WhatWasInteracted(hit.collider.gameObject); // skickar interactables gameObject till saken
             }
 
         }
+        else
+        {
+            PlayerUIScript.TextToggle(false); // scenen mÃ¥ste ha PlayerUI prefab fÃ¶r att den ska fungera, annars skiter sig allt
+        }
 
         if (isInteracting && Input.GetKeyDown(KeyCode.Escape) && !CamIsOnTheMove)
         {
             SmoothCamExit();
-            
+
         }
 
 
@@ -53,10 +91,15 @@ public class playerInteract : MonoBehaviour
             CamToPlayer();
         }
 
+        if (isInteracting && Input.GetMouseButtonDown(0))
+        {
+            PlayClickSound();
+            // H r kan du l gga din befintliga kod som klickar p  appar
+        }
 
     }
 
-    private void LockCamera() // namnet sägeer ganska mycket
+    private void LockCamera() // namnet sï¿½geer ganska mycket
     {
         CamPosPreInteract = mainCam.transform.rotation; // hatar
         movementScript.canMove = false;
@@ -67,18 +110,56 @@ public class playerInteract : MonoBehaviour
 
     private void WhatWasInteracted(GameObject currentInteractable) // borde heta changeCamPos men orka
     {
+
         string currentInteractableTag = currentInteractable.tag;
         Debug.Log("interactable tag: " + currentInteractableTag);
         switch (currentInteractableTag)
         {
             default: Debug.Log("Forgot tag on interactable"); break;
             case "computer":
-                
-                StartCoroutine(MoveCameraPos(ComputerCamPos)); // ändra ComputerCamPos beroende på interactionen, här ComputerCamPos
+
+                StartCoroutine(MoveCameraPos(ComputerCamPos)); // ï¿½ndra ComputerCamPos beroende pï¿½ interactionen, hï¿½r ComputerCamPos
                 break;
-            // lägg till fler object/tag här
+
+            case "shelf":
+                LastCamPos = ShelfCamPos;
+                StartCoroutine(MoveCameraPos(ShelfCamPos));
+                if (ShelfLogic.HasShelfKey == true)
+                {
+                    ShelfLogic.DrawerOpen(); // fick du en error runt hÃ¤r ish?, lÃ¤gg till shelf i din scen
+                }
+                else
+                {
+                    SmoothCamExit();
+                    Debug.Log("You are not capable of opening the drawer"); // man har inte nyckel
+                }
+
+                break;
+
+            case "vent":
+               
+                if (hasScrewdriver)
+                {
+                   FreeCamera();
+                    ventMove();
+                   
+
+                }
+                else
+                {
+                    FreeCamera();
+                    Debug.Log("You need a screwdriver to open this vent");
+
+                }
+
+                break;
+            case "lock":
+                StartCoroutine(MoveCameraPos(LÃ¥sCamPos));
+                break;
+                // lï¿½gg till fler object/tag hï¿½r
         }
     }
+
 
     private void FreeCamera()
     {
@@ -87,10 +168,10 @@ public class playerInteract : MonoBehaviour
         mainCam.GetComponent<cameraMovment>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
+
     }
-    
-    private void SmoothCamExit()
+
+    public void SmoothCamExit() // public sÃ¥ andra kan exita den
     {
 
         StartCoroutine(MoveCameraPos(PlayerCamPos));
@@ -98,8 +179,8 @@ public class playerInteract : MonoBehaviour
 
     private void CamToPlayer()
     {
-        mainCam.transform.position = PlayerCamPos.position; // återgå till original position
-        
+        mainCam.transform.position = PlayerCamPos.position; // ï¿½tergï¿½ till original position
+
     }
 
     private IEnumerator MoveCameraPos(Transform target)
@@ -117,7 +198,7 @@ public class playerInteract : MonoBehaviour
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.SmoothStep(0,1, elapsed/duration); // fråga inte, matte är svårt
+            float t = Mathf.SmoothStep(0, 1, elapsed / duration); // frï¿½ga inte, matte ï¿½r svï¿½rt
             mainCam.transform.position = Vector3.Lerp(CamStartPos, target.position, t);
             mainCam.transform.rotation = Quaternion.Lerp(CamStartRot, targetRot, t);
             yield return null;
@@ -128,8 +209,109 @@ public class playerInteract : MonoBehaviour
         if (target == PlayerCamPos)
         {
             FreeCamera();
+
         }
 
+        if (LastCamPos == ShelfCamPos && target == PlayerCamPos)
+        {
+            ShelfLogic.DrawerClose(); // fick du en error runt hÃ¤r ish?, lÃ¤gg till shelf i din scen
+        }
+
+
         CamIsOnTheMove = false;
+    }
+    private void PlayClickSound()
+    {
+        if (audioSource != null && mouseClickSound != null)
+        {
+            audioSource.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+            audioSource.PlayOneShot(mouseClickSound);
+        }
+    }
+    private void ventMove()
+    {
+        if (isTransitioning) return; 
+
+        if (currentVentPos == ventPos1)
+        {
+            Debug.Log("going to vent 2");
+            currentVentPos = ventPos2;
+        }
+        else
+        {
+            Debug.Log("going to vent 1");
+            currentVentPos = ventPos1;
+
+        }
+        StartCoroutine(ventTransitionCo());
+
+
+
+    }
+    private void VentSound()
+    {
+
+        int randSound = UnityEngine.Random.Range(0, ventSounds.Length);
+        audioSource.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+        audioSource.PlayOneShot(ventSounds[randSound]);
+    }
+
+
+
+
+    private IEnumerator ventTransitionCo()
+    {
+        isTransitioning = true;
+        if (movementScript == null)
+        {
+            movementScript = GetComponent<playerMovment>();
+        }
+        if (movementScript != null)
+        {
+            movementScript.canMove = false;
+        }
+        yield return StartCoroutine(FadetoBlack(1f));
+        transform.position = currentVentPos.position;
+        yield return new WaitForSeconds(0.2f);
+        yield return StartCoroutine(FadetoBlack(0f));
+
+        if (movementScript != null)
+        {
+            movementScript.canMove = true;
+        }
+        isTransitioning = false;
+        
+    }
+    private IEnumerator FadetoBlack(float targetAlpha)
+    {
+        transitionImage.gameObject.SetActive(true);
+        Color color = transitionImage.color;
+        float startAlpha = color.a;
+        float elapsed = 0f;
+        float nextCheck = 0.1f;
+       
+
+        while (elapsed < transitionSpeed)
+        {
+
+            elapsed += Time.deltaTime;
+            float t = elapsed / transitionSpeed;
+            color.a = Mathf.Lerp(startAlpha, targetAlpha, t);
+            transitionImage.color = color;
+            if (elapsed >= nextCheck)
+            {
+                VentSound();
+                nextCheck += 0.5f;
+
+            }
+            yield return null;
+        }
+        color.a = targetAlpha;
+        transitionImage.color = color;
+        if (targetAlpha == 0f)
+        {
+            transitionImage.gameObject.SetActive(false);
+        }
+
     }
 }

@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 3
   tags:
   - computer
+  - shelf
+  - vent
+  - "l\xE5s"
+  - lock
   layers:
   - Default
   - TransparentFX
