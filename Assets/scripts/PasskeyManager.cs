@@ -8,9 +8,11 @@ public class PasskeyManager : MonoBehaviour
     [SerializeField] private GameObject correct, incorrect, destroyable, unlocked;
     public bool passkeyCorrect;
     public TMP_InputField inputField;
+    [SerializeField] private ShelfLogic ShelfLogic;
 
     private void Start()
     {
+        ShelfLogic = FindFirstObjectByType<ShelfLogic>();
         inputField.onEndEdit.AddListener(ReadStringInput);
     }
     public void ReadStringInput(string s)
@@ -37,6 +39,7 @@ public class PasskeyManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(seconds);
         passkeyCorrect = true;
+        ShelfLogic.HasShelfKey = true;
         Debug.Log("Passkey is correct.");
         Destroy(destroyable);
         unlocked.SetActive(true);
