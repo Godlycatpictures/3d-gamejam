@@ -36,6 +36,7 @@ public class playerInteract : MonoBehaviour
     private Quaternion CamPosPreInteract;
 
     public bool isInteracting = false;
+    public bool isOnPc = false;
     private playerMovment movementScript;
 
     [Header("Audio")]
@@ -117,7 +118,7 @@ public class playerInteract : MonoBehaviour
         {
             default: Debug.Log("Forgot tag on interactable"); break;
             case "computer":
-
+                isOnPc = true;
                 StartCoroutine(MoveCameraPos(ComputerCamPos)); // �ndra ComputerCamPos beroende p� interactionen, h�r ComputerCamPos
                 break;
 
@@ -215,6 +216,7 @@ public class playerInteract : MonoBehaviour
         if (LastCamPos == ShelfCamPos && target == PlayerCamPos)
         {
             ShelfLogic.DrawerClose(); // fick du en error runt här ish?, lägg till shelf i din scen
+            LastCamPos = null;
         }
 
 
