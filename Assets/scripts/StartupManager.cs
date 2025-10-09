@@ -13,7 +13,7 @@ public class StartupManager : MonoBehaviour
     }
     void Update()
     {
-        if (player.isInteracting)
+        if (player.isInteracting && player.isOnPc)
         {
             print("Clicked");
             anim.SetTrigger("Startup");
