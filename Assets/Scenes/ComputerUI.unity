@@ -11320,7 +11320,7 @@ MonoBehaviour:
     COVER YOU MESSY ANIMALS.
 
 
-    // Fuck off.'
+    // Kind regards'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1837bf2074fc04447b9e834fc310e535, type: 2}
   m_sharedMaterial: {fileID: 579733882048580067, guid: 1837bf2074fc04447b9e834fc310e535, type: 2}
@@ -11531,7 +11531,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Vending Machine
+  m_text: Get some sunlight
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1837bf2074fc04447b9e834fc310e535, type: 2}
   m_sharedMaterial: {fileID: 579733882048580067, guid: 1837bf2074fc04447b9e834fc310e535, type: 2}
@@ -17940,7 +17940,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Vending Machine Problem
+  m_text: 'Hi #37
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1837bf2074fc04447b9e834fc310e535, type: 2}
   m_sharedMaterial: {fileID: 579733882048580067, guid: 1837bf2074fc04447b9e834fc310e535, type: 2}
@@ -19943,11 +19945,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Hiya! I heard that the vending machine had some issues so we''ve ordered
-    a repair for it. Should be done tomorrow.
-
-
-    //Jack Spedicey'
+  m_text: "Hope your shifts going smoothly. I just wanted to remind you its important
+    to take your scheduled moments to step away from your station when you can. I
+    know the supervisors prefer everyone to stay focused, but a little time to interact
+    with the outside can do wonders for morale.\nRemember, they say the light outside
+    helps you see things more clearly. You should \"interact\" with it sometime.\n\nStay
+    well,\n\u2014Obrien"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1837bf2074fc04447b9e834fc310e535, type: 2}
   m_sharedMaterial: {fileID: 579733882048580067, guid: 1837bf2074fc04447b9e834fc310e535, type: 2}
