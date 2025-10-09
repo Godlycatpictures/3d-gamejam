@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class ShelfLogic : MonoBehaviour
 {
-
+    public AudioSource audioSource;
     private Animator anim;
     public bool HasShelfKey = false;
     private playerInteract playerInteract;
+
+    public AudioClip openCabinet;
+    public AudioClip closeCabinet;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,6 +28,7 @@ public class ShelfLogic : MonoBehaviour
         if (HasShelfKey)
         {
             anim.SetBool("InteractShelf", true);
+            audioSource.PlayOneShot(openCabinet);
         } else
         {
             playerInteract.SmoothCamExit(); // har inte du neckeln elr nåt så kan du inte öppna
@@ -34,5 +38,6 @@ public class ShelfLogic : MonoBehaviour
     public void DrawerClose()
     {
         anim.SetBool("InteractShelf", false);
+        audioSource.PlayOneShot(closeCabinet);
     }
 }
