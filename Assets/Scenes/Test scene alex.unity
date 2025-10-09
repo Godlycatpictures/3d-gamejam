@@ -131,9 +131,9 @@ GameObject:
   - component: {fileID: 93102946}
   - component: {fileID: 93102945}
   - component: {fileID: 93102944}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Poster/Window
-  m_TagString: Untagged
+  m_TagString: poster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1908,6 +1908,7 @@ MonoBehaviour:
   interactRange: 2
   orientation: {fileID: 724076977}
   mainCam: {fileID: 1740499207}
+  transitionCanvas: {fileID: 0}
   transitionImage: {fileID: 0}
   transitionSpeed: 1
   ComputerCamPos: {fileID: 1024264699}
@@ -1920,9 +1921,12 @@ MonoBehaviour:
   PlayerUIScript: {fileID: 0}
   ventPos1: {fileID: 0}
   ventPos2: {fileID: 0}
+  isInteracting: 0
+  isOnPc: 0
   audioSource: {fileID: 0}
   mouseClickSound: {fileID: 0}
   ventSounds: []
+  posterSound: {fileID: 0}
 --- !u!114 &402301021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6670,7 +6674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1969285735}
   m_Layer: 0
-  m_Name: ___DECOR___
+  m_Name: ___Posters___
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
