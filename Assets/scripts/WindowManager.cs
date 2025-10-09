@@ -7,6 +7,8 @@ public class WindowManager : MonoBehaviour
     [SerializeField] GameObject taskUI;
     [SerializeField] GameObject trashcanUI;
     [SerializeField] GameObject myPcUI;
+    [SerializeField] GameObject passwordHintUI;
+    [SerializeField] GameObject quitGameUI;
     public void EnableUI(string uiName)
     {
         DisableAllUI();
@@ -24,8 +26,14 @@ public class WindowManager : MonoBehaviour
             case "trashcan":
                 trashcanUI.SetActive(true);
                 break;
-            case "myPc":
+            case "pc":
                 myPcUI.SetActive(true);
+                break;
+            case "passwordhint":
+                passwordHintUI.SetActive(true);
+                break;
+            case "quitgame":
+                quitGameUI.SetActive(true);
                 break;
         }
     }
@@ -45,8 +53,14 @@ public class WindowManager : MonoBehaviour
             case "trashcan":
                 trashcanUI.SetActive(false);
                 break;
-            case "myPc":
+            case "pc":
                 myPcUI.SetActive(false);
+                break;
+            case "passwordhint":
+                passwordHintUI.SetActive(false);
+                break;
+            case "quitgame":
+                quitGameUI.SetActive(false);
                 break;
         }
 
@@ -58,5 +72,7 @@ public class WindowManager : MonoBehaviour
         taskUI.SetActive(false);
         trashcanUI.SetActive(false);
         myPcUI.SetActive(false);
+        passwordHintUI.SetActive(false);
+        quitGameUI.SetActive(false);
     }
 }
