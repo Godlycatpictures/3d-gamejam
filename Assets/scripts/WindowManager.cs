@@ -25,7 +25,7 @@ public class WindowManager : MonoBehaviour
             case "trashcan":
                 trashcanUI.SetActive(true);
                 break;
-            case "myPc":
+            case "pc":
                 myPcUI.SetActive(true);
                 break;
             case "passwordhint":
@@ -49,7 +49,7 @@ public class WindowManager : MonoBehaviour
             case "trashcan":
                 trashcanUI.SetActive(false);
                 break;
-            case "myPc":
+            case "pc":
                 myPcUI.SetActive(false);
                 break;
             case "passwordhint":
