@@ -3192,6 +3192,7 @@ MonoBehaviour:
   PlayerUIScript: {fileID: 0}
   ventPos1: {fileID: 0}
   ventPos2: {fileID: 0}
+  isInteracting: 0
   audioSource: {fileID: 402301022}
   mouseClickSound: {fileID: 8300000, guid: c521f603289bb854d8e00260e5b0c297, type: 3}
   ventSounds: []
@@ -5133,6 +5134,7 @@ GameObject:
   - component: {fileID: 574641889}
   - component: {fileID: 574641888}
   - component: {fileID: 574641891}
+  - component: {fileID: 574641892}
   m_Layer: 7
   m_Name: Computer
   m_TagString: computer
@@ -5242,10 +5244,10 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: a409cbfa24998b24ca79aa05469f3538, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.451
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -5326,6 +5328,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &574641892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574641886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ecc760b2333a740847b974f1db6173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 574641891}
 --- !u!1 &579598246
 GameObject:
   m_ObjectHideFlags: 0
@@ -13376,6 +13391,7 @@ GameObject:
   - component: {fileID: 1599394859}
   - component: {fileID: 1599394858}
   - component: {fileID: 1599394862}
+  - component: {fileID: 1599394863}
   m_Layer: 5
   m_Name: ComputerCanvas
   m_TagString: Untagged
@@ -13495,6 +13511,103 @@ MonoBehaviour:
   trashcanUI: {fileID: 1812957284}
   myPcUI: {fileID: 1053154702}
   passwordHintUI: {fileID: 1741935446}
+--- !u!82 &1599394863
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599394857}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1604253395
 GameObject:
   m_ObjectHideFlags: 0
@@ -16887,6 +17000,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f46fc94b8a0154482a042ffa3e4c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startupSFX: {fileID: 8300000, guid: f59551b3f8435de4d8088e4b13e25a6d, type: 3}
+  audioSource: {fileID: 1599394863}
+  player: {fileID: 402301020}
+  computerSoundManager: {fileID: 574641892}
 --- !u!95 &2057448114
 Animator:
   serializedVersion: 7
@@ -17681,7 +17798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2134678685
 RectTransform:
   m_ObjectHideFlags: 0

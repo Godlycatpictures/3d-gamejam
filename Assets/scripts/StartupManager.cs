@@ -2,15 +2,30 @@ using UnityEngine;
 
 public class StartupManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private AudioClip startupSFX;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private playerInteract player;
+    [SerializeField] private ComputerSoundManager computerSoundManager;
+    private Animator anim;
     void Start()
     {
-
+        anim = GetComponent<Animator>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-
+        if (player.isInteracting)
+        {
+            print("Clicked");
+            anim.SetTrigger("Startup");
+            computerSoundManager.EnableComputerSounds();
+        }
+    }
+    public void PlayStartSFX()
+    {
+        audioSource.PlayOneShot(startupSFX);
+    }
+    public void Destroy()
+    {
+        Destroy(this.gameObject);
     }
 }
