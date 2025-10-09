@@ -23,10 +23,12 @@ public class QuotaManager : MonoBehaviour
             if (tasksCompleted >= requiredTasks)
             {
                 Debug.Log("Quota reached!");
+                Win();
             }
             else
             {
                 Debug.Log("Quota not reached! Not enough tasks completed.");
+                Lose();
             }
             tasksCompleted = 0;
             currentTime = givenTime;
@@ -50,5 +52,13 @@ public class QuotaManager : MonoBehaviour
         {
             TasksText.text = "All tasks completed!";
         }
+    }
+    public void Win()
+    {
+        Debug.Log("You win!");
+    }
+    public void Lose()
+    {
+        Debug.Log("You lose!");
     }
 }
