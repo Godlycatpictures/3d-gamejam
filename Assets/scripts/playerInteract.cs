@@ -272,6 +272,7 @@ public class playerInteract : MonoBehaviour
         }
         yield return StartCoroutine(FadetoBlack(1f));
         transform.position = currentVentPos.position;
+        yield return new WaitForSeconds(0.2f);
         yield return StartCoroutine(FadetoBlack(0f));
 
         if (movementScript != null)
@@ -288,6 +289,7 @@ public class playerInteract : MonoBehaviour
         float startAlpha = color.a;
         float elapsed = 0f;
         float nextCheck = 0.1f;
+       
 
         while (elapsed < transitionSpeed)
         {
@@ -299,14 +301,17 @@ public class playerInteract : MonoBehaviour
             if (elapsed >= nextCheck)
             {
                 VentSound();
-                nextCheck += 0.3f;
+                nextCheck += 0.5f;
 
             }
             yield return null;
         }
         color.a = targetAlpha;
         transitionImage.color = color;
-        transitionImage.gameObject.SetActive(false);
-      
+        if (targetAlpha == 0f)
+        {
+            transitionImage.gameObject.SetActive(false);
+        }
+
     }
 }
