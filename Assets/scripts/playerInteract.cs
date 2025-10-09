@@ -43,6 +43,7 @@ public class playerInteract : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip mouseClickSound;
     [SerializeField] private AudioClip[] ventSounds;
+    [SerializeField] private AudioClip posterSound;
 
 
     private void Start()
@@ -61,7 +62,12 @@ public class playerInteract : MonoBehaviour
         if (!isInteracting && hit.collider != null)
         {
             string interaction_text = hit.collider.tag;
-            PlayerUIScript.TextToggle(true);
+            
+            if (interaction_text != "poster")
+            {
+                PlayerUIScript.TextToggle(true);
+            }
+
             PlayerUIScript.ChangeUIText(interaction_text, "E");
 
 
@@ -157,6 +163,12 @@ public class playerInteract : MonoBehaviour
                 break;
             case "lock":
                 StartCoroutine(MoveCameraPos(LåsCamPos));
+                break;
+            case "poster":
+                Destroy(currentInteractable);
+                audioSource.PlayOneShot(posterSound);
+                FreeCamera();
+                
                 break;
                 // l�gg till fler object/tag h�r
         }

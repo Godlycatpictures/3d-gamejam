@@ -9,6 +9,7 @@ TagManager:
   - vent
   - "l\xE5s"
   - lock
+  - poster
   layers:
   - Default
   - TransparentFX
