@@ -12,6 +12,7 @@ public class playerInteract : MonoBehaviour
 
     [Header("Transition")]
     private bool isTransitioning = false;
+    [SerializeField] private Canvas transitionCanvas;
     [SerializeField] private Image transitionImage;
     [SerializeField] private float transitionSpeed = 1f;
     [Header("Camera Positions")] // l�gg till felr positioner f�r interactables
@@ -43,6 +44,7 @@ public class playerInteract : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip mouseClickSound;
     [SerializeField] private AudioClip[] ventSounds;
+    [SerializeField] private AudioClip posterSound;
 
 
     private void Start()
@@ -61,7 +63,12 @@ public class playerInteract : MonoBehaviour
         if (!isInteracting && hit.collider != null)
         {
             string interaction_text = hit.collider.tag;
-            PlayerUIScript.TextToggle(true);
+            
+            if (interaction_text != "poster")
+            {
+                PlayerUIScript.TextToggle(true);
+            }
+
             PlayerUIScript.ChangeUIText(interaction_text, "E");
 
 
@@ -82,7 +89,7 @@ public class playerInteract : MonoBehaviour
         if (isInteracting && Input.GetKeyDown(KeyCode.Escape) && !CamIsOnTheMove)
         {
             SmoothCamExit();
-
+            isOnPc = false;
         }
 
 
@@ -92,7 +99,7 @@ public class playerInteract : MonoBehaviour
             CamToPlayer();
         }
 
-        if (isInteracting && Input.GetMouseButtonDown(0))
+        if (isInteracting && Input.GetMouseButtonDown(0) && isOnPc)
         {
             PlayClickSound();
             // H r kan du l gga din befintliga kod som klickar p  appar
@@ -157,6 +164,12 @@ public class playerInteract : MonoBehaviour
                 break;
             case "lock":
                 StartCoroutine(MoveCameraPos(LåsCamPos));
+                break;
+            case "poster":
+                Destroy(currentInteractable);
+                audioSource.PlayOneShot(posterSound);
+                FreeCamera();
+                
                 break;
                 // l�gg till fler object/tag h�r
         }
@@ -225,7 +238,7 @@ public class playerInteract : MonoBehaviour
     }
     private void PlayClickSound()
     {
-        if (audioSource != null && mouseClickSound != null)
+        if (audioSource != null && mouseClickSound != null )
         {
             audioSource.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
             audioSource.PlayOneShot(mouseClickSound);
@@ -273,10 +286,10 @@ public class playerInteract : MonoBehaviour
         {
             movementScript.canMove = false;
         }
-        yield return StartCoroutine(FadetoBlack(1f));
+        yield return StartCoroutine(FadetoBlackVent(1f));
         transform.position = currentVentPos.position;
         yield return new WaitForSeconds(0.5f);
-        yield return StartCoroutine(FadetoBlack(0f));
+        yield return StartCoroutine(FadetoBlackVent(0f));
 
         if (movementScript != null)
         {
@@ -285,9 +298,9 @@ public class playerInteract : MonoBehaviour
         isTransitioning = false;
 
     }
-    private IEnumerator FadetoBlack(float targetAlpha)
+    private IEnumerator FadetoBlackVent(float targetAlpha)
     {
-        transitionImage.gameObject.SetActive(true);
+        transitionCanvas.gameObject.SetActive(true);
         Color color = transitionImage.color;
         float startAlpha = color.a;
         float elapsed = 0f;
@@ -313,8 +326,9 @@ public class playerInteract : MonoBehaviour
         transitionImage.color = color;
         if (targetAlpha == 0f)
         {
-            transitionImage.gameObject.SetActive(false);
+            transitionCanvas.gameObject.SetActive(false);
         }
 
     }
+       
 }
