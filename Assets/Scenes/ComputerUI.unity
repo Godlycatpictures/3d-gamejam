@@ -3744,6 +3744,7 @@ MonoBehaviour:
   ventPos1: {fileID: 0}
   ventPos2: {fileID: 0}
   isInteracting: 0
+  isOnPc: 0
   audioSource: {fileID: 402301022}
   mouseClickSound: {fileID: 8300000, guid: c521f603289bb854d8e00260e5b0c297, type: 3}
   ventSounds: []
@@ -19263,7 +19264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2057448112
 Transform:
   m_ObjectHideFlags: 0
