@@ -10,6 +10,8 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private Transform orientation;
     [SerializeField] private Camera mainCam;
 
+    
+
     [Header("Transition")]
     private bool isTransitioning = false;
     [SerializeField] private Canvas transitionCanvas;
@@ -32,6 +34,7 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private PlayerUIScript PlayerUIScript;
     [SerializeField] private Transform ventPos1, ventPos2;
     private Transform currentVentPos = null;
+    [SerializeField] private GameObject VentObject;
 
     private bool CamIsOnTheMove = false;
     private Quaternion CamPosPreInteract;
@@ -63,11 +66,12 @@ public class playerInteract : MonoBehaviour
         if (!isInteracting && hit.collider != null)
         {
             string interaction_text = hit.collider.tag;
-            
+
             if (interaction_text != "poster")
             {
                 PlayerUIScript.TextToggle(true);
             }
+        
 
             PlayerUIScript.ChangeUIText(interaction_text, "E");
 
@@ -104,7 +108,7 @@ public class playerInteract : MonoBehaviour
             PlayClickSound();
             // H r kan du l gga din befintliga kod som klickar p  appar
         }
-
+   
     }
 
     private void LockCamera() // namnet s�geer ganska mycket
@@ -166,9 +170,11 @@ public class playerInteract : MonoBehaviour
                 StartCoroutine(MoveCameraPos(LåsCamPos));
                 break;
             case "poster":
-                Destroy(currentInteractable);
-                audioSource.PlayOneShot(posterSound);
-                FreeCamera();
+            VentObject.SetActive(true);
+            audioSource.PlayOneShot(posterSound);
+            FreeCamera();
+            Destroy(currentInteractable);
+               
                 
                 break;
                 // l�gg till fler object/tag h�r
