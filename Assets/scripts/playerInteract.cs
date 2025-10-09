@@ -35,7 +35,7 @@ public class playerInteract : MonoBehaviour
     private bool CamIsOnTheMove = false;
     private Quaternion CamPosPreInteract;
 
-    private bool isInteracting = false;
+    public bool isInteracting = false;
     private playerMovment movementScript;
 
     [Header("Audio")]
@@ -137,12 +137,12 @@ public class playerInteract : MonoBehaviour
                 break;
 
             case "vent":
-               
+
                 if (hasScrewdriver)
                 {
-                   FreeCamera();
+                    FreeCamera();
                     ventMove();
-                   
+
 
                 }
                 else
@@ -230,7 +230,7 @@ public class playerInteract : MonoBehaviour
     }
     private void ventMove()
     {
-        if (isTransitioning) return; 
+        if (isTransitioning) return;
 
         if (currentVentPos == ventPos1)
         {
@@ -280,7 +280,7 @@ public class playerInteract : MonoBehaviour
             movementScript.canMove = true;
         }
         isTransitioning = false;
-        
+
     }
     private IEnumerator FadetoBlack(float targetAlpha)
     {
@@ -289,7 +289,7 @@ public class playerInteract : MonoBehaviour
         float startAlpha = color.a;
         float elapsed = 0f;
         float nextCheck = 0.1f;
-       
+
 
         while (elapsed < transitionSpeed)
         {
