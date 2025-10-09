@@ -8,6 +8,8 @@ public class lockScript : MonoBehaviour
     public bool isUnlocked = false;
     public Canvas lockCanvas;
     private playerInteract playerInteractScript;
+
+    [SerializeField] private GameObject Door;
     [SerializeField] private TextMeshProUGUI num1Text;
     [SerializeField] private TextMeshProUGUI num2Text;
     [SerializeField] private TextMeshProUGUI num3Text;
@@ -90,11 +92,13 @@ public class lockScript : MonoBehaviour
         if (num1 == correctNum1 && num2 == correctNum2 && num3 == correctNum3 && num4 == correctNum4)
         {
             isUnlocked = true;
-          
+
             playerInteractScript = GameObject.Find("Player").GetComponent<playerInteract>();
             playerInteractScript.SmoothCamExit();
-
+            Door.transform.position= new Vector3(0f, -10f, 0f);   
             Debug.Log("Unlocked");
+            lockCanvas.enabled = false;
+            this.gameObject.SetActive(false);
         }
         else
         {
