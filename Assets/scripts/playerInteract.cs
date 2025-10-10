@@ -10,8 +10,11 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private Transform orientation;
     [SerializeField] private Camera mainCam;
 
+    
+
     [Header("Transition")]
     private bool isTransitioning = false;
+    [SerializeField] private Canvas transitionCanvas;
     [SerializeField] private Image transitionImage;
     [SerializeField] private float transitionSpeed = 1f;
     [Header("Camera Positions")] // l�gg till felr positioner f�r interactables
@@ -31,17 +34,20 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private PlayerUIScript PlayerUIScript;
     [SerializeField] private Transform ventPos1, ventPos2;
     private Transform currentVentPos = null;
+    [SerializeField] private GameObject VentObject;
 
     private bool CamIsOnTheMove = false;
     private Quaternion CamPosPreInteract;
 
-    private bool isInteracting = false;
+    public bool isInteracting = false;
+    public bool isOnPc = false;
     private playerMovment movementScript;
 
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip mouseClickSound;
     [SerializeField] private AudioClip[] ventSounds;
+    [SerializeField] private AudioClip posterSound;
 
 
     private void Start()
@@ -60,7 +66,13 @@ public class playerInteract : MonoBehaviour
         if (!isInteracting && hit.collider != null)
         {
             string interaction_text = hit.collider.tag;
-            PlayerUIScript.TextToggle(true);
+
+            if (interaction_text != "poster")
+            {
+                PlayerUIScript.TextToggle(true);
+            }
+        
+
             PlayerUIScript.ChangeUIText(interaction_text, "E");
 
 
@@ -81,7 +93,7 @@ public class playerInteract : MonoBehaviour
         if (isInteracting && Input.GetKeyDown(KeyCode.Escape) && !CamIsOnTheMove)
         {
             SmoothCamExit();
-
+            isOnPc = false;
         }
 
 
@@ -91,12 +103,12 @@ public class playerInteract : MonoBehaviour
             CamToPlayer();
         }
 
-        if (isInteracting && Input.GetMouseButtonDown(0))
+        if (isInteracting && Input.GetMouseButtonDown(0) && isOnPc)
         {
             PlayClickSound();
             // H r kan du l gga din befintliga kod som klickar p  appar
         }
-
+   
     }
 
     private void LockCamera() // namnet s�geer ganska mycket
@@ -117,7 +129,7 @@ public class playerInteract : MonoBehaviour
         {
             default: Debug.Log("Forgot tag on interactable"); break;
             case "computer":
-
+                isOnPc = true;
                 StartCoroutine(MoveCameraPos(ComputerCamPos)); // �ndra ComputerCamPos beroende p� interactionen, h�r ComputerCamPos
                 break;
 
@@ -126,6 +138,7 @@ public class playerInteract : MonoBehaviour
                 StartCoroutine(MoveCameraPos(ShelfCamPos));
                 if (ShelfLogic.HasShelfKey == true)
                 {
+                    hasScrewdriver = true;
                     ShelfLogic.DrawerOpen(); // fick du en error runt här ish?, lägg till shelf i din scen
                 }
                 else
@@ -137,12 +150,12 @@ public class playerInteract : MonoBehaviour
                 break;
 
             case "vent":
-               
+
                 if (hasScrewdriver)
                 {
-                   FreeCamera();
+                    FreeCamera();
                     ventMove();
-                   
+
 
                 }
                 else
@@ -155,6 +168,14 @@ public class playerInteract : MonoBehaviour
                 break;
             case "lock":
                 StartCoroutine(MoveCameraPos(LåsCamPos));
+                break;
+            case "poster":
+            VentObject.SetActive(true);
+            audioSource.PlayOneShot(posterSound);
+            FreeCamera();
+            Destroy(currentInteractable);
+               
+                
                 break;
                 // l�gg till fler object/tag h�r
         }
@@ -215,6 +236,7 @@ public class playerInteract : MonoBehaviour
         if (LastCamPos == ShelfCamPos && target == PlayerCamPos)
         {
             ShelfLogic.DrawerClose(); // fick du en error runt här ish?, lägg till shelf i din scen
+            LastCamPos = null;
         }
 
 
@@ -222,7 +244,7 @@ public class playerInteract : MonoBehaviour
     }
     private void PlayClickSound()
     {
-        if (audioSource != null && mouseClickSound != null)
+        if (audioSource != null && mouseClickSound != null )
         {
             audioSource.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
             audioSource.PlayOneShot(mouseClickSound);
@@ -230,7 +252,7 @@ public class playerInteract : MonoBehaviour
     }
     private void ventMove()
     {
-        if (isTransitioning) return; 
+        if (isTransitioning) return;
 
         if (currentVentPos == ventPos1)
         {
@@ -270,26 +292,26 @@ public class playerInteract : MonoBehaviour
         {
             movementScript.canMove = false;
         }
-        yield return StartCoroutine(FadetoBlack(1f));
+        yield return StartCoroutine(FadetoBlackVent(1f));
         transform.position = currentVentPos.position;
         yield return new WaitForSeconds(0.5f);
-        yield return StartCoroutine(FadetoBlack(0f));
+        yield return StartCoroutine(FadetoBlackVent(0f));
 
         if (movementScript != null)
         {
             movementScript.canMove = true;
         }
         isTransitioning = false;
-        
+
     }
-    private IEnumerator FadetoBlack(float targetAlpha)
+    private IEnumerator FadetoBlackVent(float targetAlpha)
     {
-        transitionImage.gameObject.SetActive(true);
+        transitionCanvas.gameObject.SetActive(true);
         Color color = transitionImage.color;
         float startAlpha = color.a;
         float elapsed = 0f;
         float nextCheck = 0.1f;
-       
+
 
         while (elapsed < transitionSpeed)
         {
@@ -310,8 +332,9 @@ public class playerInteract : MonoBehaviour
         transitionImage.color = color;
         if (targetAlpha == 0f)
         {
-            transitionImage.gameObject.SetActive(false);
+            transitionCanvas.gameObject.SetActive(false);
         }
 
     }
+       
 }
