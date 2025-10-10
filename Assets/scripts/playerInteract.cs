@@ -10,7 +10,7 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private Transform orientation;
     [SerializeField] private Camera mainCam;
 
-    
+
 
     [Header("Transition")]
     private bool isTransitioning = false;
@@ -34,7 +34,7 @@ public class playerInteract : MonoBehaviour
     [SerializeField] private PlayerUIScript PlayerUIScript;
     [SerializeField] private Transform ventPos1, ventPos2;
     private Transform currentVentPos = null;
-    [SerializeField] private GameObject VentObject;
+    [SerializeField] private GameObject VentObject, screwdriverObject;
 
     private bool CamIsOnTheMove = false;
     private Quaternion CamPosPreInteract;
@@ -47,7 +47,7 @@ public class playerInteract : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip mouseClickSound;
     [SerializeField] private AudioClip[] ventSounds;
-    [SerializeField] private AudioClip posterSound;
+    [SerializeField] private AudioClip posterSound, screwdriverSound;
 
 
     private void Start()
@@ -71,7 +71,7 @@ public class playerInteract : MonoBehaviour
             {
                 PlayerUIScript.TextToggle(true);
             }
-        
+
 
             PlayerUIScript.ChangeUIText(interaction_text, "E");
 
@@ -108,7 +108,7 @@ public class playerInteract : MonoBehaviour
             PlayClickSound();
             // H r kan du l gga din befintliga kod som klickar p  appar
         }
-   
+
     }
 
     private void LockCamera() // namnet s�geer ganska mycket
@@ -138,8 +138,8 @@ public class playerInteract : MonoBehaviour
                 StartCoroutine(MoveCameraPos(ShelfCamPos));
                 if (ShelfLogic.HasShelfKey == true)
                 {
-                    hasScrewdriver = true;
                     ShelfLogic.DrawerOpen(); // fick du en error runt här ish?, lägg till shelf i din scen
+                    StartCoroutine(GetScrewdriver(2f));
                 }
                 else
                 {
@@ -170,12 +170,12 @@ public class playerInteract : MonoBehaviour
                 StartCoroutine(MoveCameraPos(LåsCamPos));
                 break;
             case "poster":
-            VentObject.SetActive(true);
-            audioSource.PlayOneShot(posterSound);
-            FreeCamera();
-            Destroy(currentInteractable);
-               
-                
+                VentObject.SetActive(true);
+                audioSource.PlayOneShot(posterSound);
+                FreeCamera();
+                Destroy(currentInteractable);
+
+
                 break;
                 // l�gg till fler object/tag h�r
         }
@@ -244,7 +244,7 @@ public class playerInteract : MonoBehaviour
     }
     private void PlayClickSound()
     {
-        if (audioSource != null && mouseClickSound != null )
+        if (audioSource != null && mouseClickSound != null)
         {
             audioSource.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
             audioSource.PlayOneShot(mouseClickSound);
@@ -334,7 +334,13 @@ public class playerInteract : MonoBehaviour
         {
             transitionCanvas.gameObject.SetActive(false);
         }
-
     }
-       
+    private IEnumerator GetScrewdriver(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        audioSource.PlayOneShot(screwdriverSound);
+        Destroy(screwdriverObject);
+        hasScrewdriver = true;
+    }
+
 }
